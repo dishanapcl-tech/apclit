@@ -4,7 +4,7 @@ import { ArrowUpRight, Mail, MapPin, Menu, Phone, X } from 'lucide-react'
 import { COMPANY } from '../data'
 
 const nav = [
-  ['Home','/'],['About Us','/about'],['Our Team','/team'],['Design Division','/design'],
+  ['Home','/'],['About Us','/about'],['Our Team','/testing-team'],['Design Division','/design'],
   ['Testing Division','/testing'],['Projects','/projects'],['Instruments','/instruments'],
   ['Clients','/clients'],['Contact','/contact']
 ]

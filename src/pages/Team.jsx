@@ -1,6 +1,132 @@
-import { useMemo, useState } from 'react'
-import { Search } from 'lucide-react'
-import { PageHero } from '../components/Layout'
-import { team } from '../data'
-function initials(name){return name.split(/\s+/).filter(Boolean).slice(0,2).map(p=>p.replace(/[.,]/g,'')[0]).join('').toUpperCase()}
-export default function Team(){const [filter,setFilter]=useState('All');const [search,setSearch]=useState('');const categories=['All','Executive Consultant','Non-Executive Consultant','Engineering Executive','Engineering Support'];const shown=useMemo(()=>team.filter(p=>(filter==='All'||p.category===filter)&&`${p.name} ${p.role} ${p.area}`.toLowerCase().includes(search.toLowerCase())),[filter,search]);return <><PageHero eyebrow="Our Team" title="Engineering people. Shared commitment." subtitle="Team roles and qualifications are based on the APCL company profile. Portraits are included where available in the supplied document."/><section className="py-14 md:py-20"><div className="mx-auto max-w-7xl px-5 md:px-6"><div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"><div><p className="text-xs font-extrabold uppercase tracking-[.2em] text-amber-700">Our people</p><h2 className="mt-2 text-3xl font-black text-[#123b64]">Meet the APCL team</h2></div><div className="flex flex-col gap-3 sm:flex-row"><label className="flex items-center gap-2 rounded-lg border border-slate-200 px-3"><Search size={17} className="text-slate-400"/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search team..." className="w-full py-3 text-sm outline-none sm:w-48"/></label><select value={filter} onChange={e=>setFilter(e.target.value)} className="rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm font-semibold"><option>All</option>{categories.slice(1).map(c=><option key={c}>{c}</option>)}</select></div></div><div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{shown.map(p=><article key={p.name} className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-xl"><div className="flex h-52 items-center justify-center bg-gradient-to-br from-[#e8eff6] to-[#f8fafc]">{p.image?<img src={p.image} alt={p.name} className="h-full w-full object-cover"/>:<div className="flex h-28 w-28 items-center justify-center rounded-full border-4 border-white bg-[#123b64] text-3xl font-black text-amber-300 shadow-lg">{initials(p.name)}</div>}</div><div className="p-5"><span className="rounded-full bg-amber-50 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-amber-800">{p.category}</span><h3 className="mt-4 text-lg font-extrabold leading-snug text-[#123b64]">{p.name}</h3><p className="mt-1 text-sm font-bold text-slate-600">{p.role}</p><p className="mt-1 text-sm text-amber-700">{p.area}</p><details className="mt-4 border-t border-slate-100 pt-3"><summary className="cursor-pointer text-sm font-bold text-[#123b64]">Qualifications</summary><p className="mt-3 text-xs leading-6 text-slate-500">{p.qualifications}</p></details></div></article>)}</div>{shown.length===0&&<p className="mt-10 rounded-xl bg-slate-50 p-8 text-center text-slate-500">No team members match your search.</p>}<p className="mt-8 text-xs leading-6 text-slate-500">The supplied profile includes portraits for the founder and one senior leader. Initials are used for other members rather than inventing photographs. Add approved staff portraits and verify current roles before launch.</p></div></section></>}
+import { useMemo, useState } from "react";
+import { Search } from "lucide-react";
+import { PageHero } from "../components/Layout";
+import { team } from "../data";
+function initials(name) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p.replace(/[.,]/g, "")[0])
+    .join("")
+    .toUpperCase();
+}
+export default function Team() {
+  const [filter, setFilter] = useState("All");
+  const [search, setSearch] = useState("");
+  const categories = [
+    "All",
+    "Executive Consultant",
+    "Non-Executive Consultant",
+    "Engineering Executive",
+    "Engineering Support",
+  ];
+  const shown = useMemo(
+    () =>
+      team.filter(
+        (p) =>
+          (filter === "All" || p.category === filter) &&
+          `${p.name} ${p.role} ${p.area}`
+            .toLowerCase()
+            .includes(search.toLowerCase()),
+      ),
+    [filter, search],
+  );
+  return (
+    <>
+      <PageHero
+        eyebrow="Our Team"
+        title="Engineering people. Shared commitment."
+        subtitle="Team roles and qualifications are based on the APCL company profile. Portraits are included where available in the supplied document."
+      />
+      <section className="py-14 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 md:px-6">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[.2em] text-amber-700">
+                Our people
+              </p>
+              <h2 className="mt-2 text-3xl font-black text-[#123b64]">
+                Meet the APCL team
+              </h2>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <label className="flex items-center gap-2 rounded-lg border border-slate-200 px-3">
+                <Search size={17} className="text-slate-400" />
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search team..."
+                  className="w-full py-3 text-sm outline-none sm:w-48"
+                />
+              </label>
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm font-semibold"
+              >
+                <option>All</option>
+                {categories.slice(1).map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {shown.map((p) => (
+              <article
+                key={p.name}
+                className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="flex h-52 items-center justify-center bg-gradient-to-br from-[#e8eff6] to-[#f8fafc]">
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-28 w-28 items-center justify-center rounded-full border-4 border-white bg-[#123b64] text-3xl font-black text-amber-300 shadow-lg">
+                      {initials(p.name)}
+                    </div>
+                  )}
+                </div>
+                <div className="p-5">
+                  <span className="rounded-full bg-amber-50 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-amber-800">
+                    {p.category}
+                  </span>
+                  <h3 className="mt-4 text-lg font-extrabold leading-snug text-[#123b64]">
+                    {p.name}
+                  </h3>
+                  <p className="mt-1 text-sm font-bold text-slate-600">
+                    {p.role}
+                  </p>
+                  <p className="mt-1 text-sm text-amber-700">{p.area}</p>
+                  <details className="mt-4 border-t border-slate-100 pt-3">
+                    <summary className="cursor-pointer text-sm font-bold text-[#123b64]">
+                      Qualifications
+                    </summary>
+                    <p className="mt-3 text-xs leading-6 text-slate-500">
+                      {p.qualifications}
+                    </p>
+                  </details>
+                </div>
+              </article>
+            ))}
+          </div>
+          {shown.length === 0 && (
+            <p className="mt-10 rounded-xl bg-slate-50 p-8 text-center text-slate-500">
+              No team members match your search.
+            </p>
+          )}
+          <p className="mt-8 text-xs leading-6 text-slate-500">
+            The supplied profile includes portraits for the founder and one
+            senior leader. Initials are used for other members rather than
+            inventing photographs. Add approved staff portraits and verify
+            current roles before launch.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
