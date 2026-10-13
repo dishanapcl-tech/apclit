@@ -1,3 +1,136 @@
-import { CheckCircle2, ShieldCheck, Target, Award } from 'lucide-react'
-import { PageHero, SectionHeading } from '../components/Layout'
-export default function About(){const values=[['Client-focused service','Responding to the agreed needs and technical requirements of clients.'],['Professional engineering','Involvement of qualified engineers and chartered-engineer supervision where applicable.'],['Quality management','The company profile states ISO 9001:2015 QMS certification. Confirm current status before publishing.'],['Safety-conscious practices','Appropriate PPE, procedures and careful attention to electrical safety.']];const icons=[Target,ShieldCheck,Award,CheckCircle2];return <><PageHero eyebrow="About APCL" title="Engineering knowledge built on practical experience." subtitle="Electrical power engineering, design, testing, commissioning, auditing and consultancy." image="/images/project-grid-substation.jpeg"/><section className="py-16 md:py-20"><div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-6 lg:grid-cols-[1.1fr_.9fr]"><div><SectionHeading eyebrow="Who We Are" title="A Sri Lankan engineering consultancy serving a wide range of projects."/><p className="mt-6 leading-8 text-slate-600">According to APCL's company profile, the company was established in 2002 and registered in 2004 by the late Eng. Rienzie Fernando following a 22-year career with the Ceylon Electricity Board. The profile describes work in electrical engineering design, consultation, energy consultation, testing and commissioning, and auditing.</p><p className="mt-4 leading-8 text-slate-600">The profile also describes capabilities in power system planning, protection and analysis, renewable energy integration, software-based simulation and training for utilities and engineers.</p><p className="mt-4 leading-8 text-slate-600">APCL's stated mission is to provide technically sound, economically viable and regulatory-compliant solutions for stakeholders in Sri Lanka and internationally.</p></div><div className="rounded-2xl bg-[#123b64] p-8 text-white"><img src="/images/apcl-logo.png" alt="APCL logo" className="h-20 w-20 rounded-xl bg-white p-2 object-contain"/><p className="mt-6 text-xs font-extrabold uppercase tracking-[.2em] text-amber-300">At a glance</p><div className="mt-5 space-y-4">{[['Established','2004'],['Core areas','Design · Testing · Consultancy'],['Location','Rajagiriya, Sri Lanka'],['Website','www.apcl.lk']].map(([k,v])=><div key={k} className="flex justify-between gap-4 border-b border-white/15 pb-3"><span className="text-sm text-slate-300">{k}</span><span className="text-right text-sm font-bold">{v}</span></div>)}</div></div></div></section><section className="bg-slate-50 py-16 md:py-20"><div className="mx-auto max-w-7xl px-5 md:px-6"><SectionHeading eyebrow="Why APCL" title="Principles described in our company profile."/><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{values.map(([title,text],i)=>{const Icon=icons[i];return <div key={title} className="rounded-2xl border border-slate-200 bg-white p-6"><span className="inline-flex rounded-xl bg-amber-50 p-3 text-amber-700"><Icon size={24}/></span><h3 className="mt-5 font-extrabold text-[#123b64]">{title}</h3><p className="mt-3 text-sm leading-7 text-slate-500">{text}</p></div>})}</div></div></section><section className="py-16 md:py-20"><div className="mx-auto max-w-4xl px-5 md:px-6"><p className="text-xs font-extrabold uppercase tracking-[.2em] text-amber-700">Quality Policy</p><blockquote className="mt-5 border-l-4 border-amber-400 pl-6 text-xl font-medium leading-9 text-[#123b64]">“Amithi Power Consultants (Pvt) Ltd is an Electrical HV, MV, LV System Design, Testing, Commissioning, Auditing and MEP Design company in Sri Lanka, which sets a benchmark in addressing the requirement of the client while maintaining Quality Management System meeting ISO 9001:2015 standards, legal & stakeholder requirements.”</blockquote><p className="mt-4 text-sm text-slate-500">Excerpt from the supplied profile. Confirm the current policy and certification details before publication.</p></div></section></>}
+import { CheckCircle2, ShieldCheck, Target, Award } from "lucide-react";
+import { PageHero, SectionHeading } from "../components/Layout";
+export default function About() {
+  const values = [
+    [
+      "Client-focused service",
+      "Responding to the agreed needs and technical requirements of clients.",
+    ],
+    [
+      "Professional engineering",
+      "Involvement of qualified engineers and chartered-engineer supervision where applicable.",
+    ],
+    [
+      "Quality management",
+      "The company profile states ISO 9001:2015 QMS certification. Confirm current status before publishing.",
+    ],
+    [
+      "Safety-conscious practices",
+      "Appropriate PPE, procedures and careful attention to electrical safety.",
+    ],
+  ];
+  const icons = [Target, ShieldCheck, Award, CheckCircle2];
+  return (
+    <>
+      <PageHero
+        eyebrow="About APCL"
+        title="Engineering knowledge built on practical experience."
+        subtitle="Electrical power engineering, design, testing, commissioning, auditing and consultancy."
+        image="/images/project-grid-substation.jpeg"
+      />
+      <section className="py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-6 lg:grid-cols-[1.1fr_.9fr]">
+          <div>
+            <SectionHeading
+              eyebrow="Who We Are"
+              title="A Sri Lankan engineering consultancy serving a wide range of projects."
+            />
+            <p className="mt-6 leading-8 text-slate-600">
+              According to APCL's company profile, the company was established
+              in 2002 and registered in 2004 by the late Eng. Rienzie Fernando
+              following a 22-year career with the Ceylon Electricity Board. The
+              profile describes work in electrical engineering design,
+              consultation, energy consultation, testing and commissioning, and
+              auditing.
+            </p>
+            <p className="mt-4 leading-8 text-slate-600">
+              The profile also describes capabilities in power system planning,
+              protection and analysis, renewable energy integration,
+              software-based simulation and training for utilities and
+              engineers.
+            </p>
+            <p className="mt-4 leading-8 text-slate-600">
+              APCL's stated mission is to provide technically sound,
+              economically viable and regulatory-compliant solutions for
+              stakeholders in Sri Lanka and internationally.
+            </p>
+          </div>
+          <div className="rounded-2xl bg-[#123b64] p-8 text-white">
+            <img
+              src="/images/apcl-logo.png"
+              alt="APCL logo"
+              className="h-20 w-20 rounded-xl bg-white p-2 object-contain"
+            />
+            <p className="mt-6 text-xs font-extrabold uppercase tracking-[.2em] text-amber-300">
+              At a glance
+            </p>
+            <div className="mt-5 space-y-4">
+              {[
+                ["Established", "2004"],
+                ["Core areas", "Design · Testing · Consultancy"],
+                ["Location", "Rajagiriya, Sri Lanka"],
+                ["Website", "www.apcl.lk"],
+              ].map(([k, v]) => (
+                <div
+                  key={k}
+                  className="flex justify-between gap-4 border-b border-white/15 pb-3"
+                >
+                  <span className="text-sm text-slate-300">{k}</span>
+                  <span className="text-right text-sm font-bold">{v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-slate-50 py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-5 md:px-6">
+          <SectionHeading
+            eyebrow="Why APCL"
+            title="Principles described in our company profile."
+          />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map(([title, text], i) => {
+              const Icon = icons[i];
+              return (
+                <div
+                  key={title}
+                  className="rounded-2xl border border-slate-200 bg-white p-6"
+                >
+                  <span className="inline-flex rounded-xl bg-amber-50 p-3 text-amber-700">
+                    <Icon size={24} />
+                  </span>
+                  <h3 className="mt-5 font-extrabold text-[#123b64]">
+                    {title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-500">
+                    {text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-4xl px-5 md:px-6">
+          <p className="text-xs font-extrabold uppercase tracking-[.2em] text-amber-700">
+            Quality Policy
+          </p>
+          <blockquote className="mt-5 border-l-4 border-amber-400 pl-6 text-xl font-medium leading-9 text-[#123b64]">
+            “Amithi Power Consultants (Pvt) Ltd is an Electrical HV, MV, LV
+            System Design, Testing, Commissioning, Auditing and MEP Design
+            company in Sri Lanka, which sets a benchmark in addressing the
+            requirement of the client while maintaining Quality Management
+            System meeting ISO 9001:2015 standards, legal & stakeholder
+            requirements.”
+          </blockquote>
+          <p className="mt-4 text-sm text-slate-500">
+            Excerpt from the supplied profile. Confirm the current policy and
+            certification details before publication.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}

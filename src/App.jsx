@@ -9,6 +9,9 @@ import Projects from "./pages/Projects";
 import Instruments from "./pages/Instruments";
 import Clients from "./pages/Clients";
 import Contact from "./pages/Contact";
+import TestingTeam from './pages/TestingTeam'
+
+
 function NotFound() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-28 text-center">
@@ -41,6 +44,7 @@ export default function App() {
           <Route path="instruments" element={<Instruments />} />
           <Route path="clients" element={<Clients />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="/testing-team" element={<TestingTeam />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
