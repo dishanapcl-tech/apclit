@@ -44,7 +44,7 @@ export default function App() {
           <Route path="instruments" element={<Instruments />} />
           <Route path="clients" element={<Clients />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="/testing-team" element={<TestingTeam />} />
+          {/* <Route path="/testing-team" element={<TestingTeam />} /> */}
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
