@@ -89,7 +89,7 @@ export default function Home() {
           <div className="hidden lg:block">
             <div className="ml-auto max-w-sm rounded-2xl border border-white/20 bg-white/10 p-7 text-white shadow-2xl backdrop-blur-md">
               <img
-                src="/images/apcl-logo.png"
+                src="/images/apcl_logo.png"
                 alt="APCL logo"
                 className="h-16 w-16 rounded-xl bg-white object-contain p-1"
               />
