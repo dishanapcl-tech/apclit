@@ -10,6 +10,7 @@ import Instruments from "./pages/Instruments";
 import Clients from "./pages/Clients";
 import Contact from "./pages/Contact";
 import TestingTeam from './pages/TestingTeam'
+import Careers from "./pages/Careers";
 
 
 function NotFound() {
@@ -44,8 +45,9 @@ export default function App() {
           <Route path="instruments" element={<Instruments />} />
           <Route path="clients" element={<Clients />} />
           <Route path="contact" element={<Contact />} />
-          {/* <Route path="/testing-team" element={<TestingTeam />} /> */}
+          {/* {<Route path="/testing-team" element={<TestingTeam />} />} */}
           <Route path="*" element={<NotFound />} />
+          <Route path="/careers" element={<Careers />} />
         </Route>
       </Routes>
     </BrowserRouter>

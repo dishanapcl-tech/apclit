@@ -6,7 +6,7 @@ import { COMPANY } from '../data'
 const nav = [
   ['Home','/'],['About Us','/about'],['Our Team','/testing-team'],['Design Division','/design'],
   ['Testing Division','/testing'],['Projects','/projects'],['Instruments','/instruments'],
-  ['Clients','/clients'],['Contact','/contact']
+  ['Clients','/clients'],['Careers','/careers'],['Contact','/contact']
 ]
 function Brand(){return <Link to="/" className="flex shrink-0 items-center gap-3" aria-label="APCL home"><img src="/images/apcl_logo.png" alt="APCL logo" className="h-16 w-16 rounded-lg object-contain"/><span><b className="block text-lg font-black tracking-wider text-[#123b64]">AMITHI</b><small className="block text-[9px] font-extrabold uppercase tracking-[.18em] text-slate-500">Power Consultants</small></span></Link>}
 export function PageHero({eyebrow,title,subtitle,image}){return <section className="relative isolate overflow-hidden bg-[#123b64]">{image&&<div className="absolute inset-0 -z-20 bg-cover bg-center" style={{backgroundImage:`url("${image}")`}}/>}<div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#091c32]/95 via-[#123b64]/85 to-[#123b64]/55"/><div className="mx-auto max-w-7xl px-5 py-16 md:px-6 md:py-20"><p className="mb-4 text-xs font-black uppercase tracking-[.2em] text-amber-300">{eyebrow}</p><h1 className="max-w-4xl text-4xl font-black leading-tight text-white sm:text-5xl">{title}</h1>{subtitle&&<p className="mt-5 max-w-3xl text-base leading-8 text-slate-200 md:text-lg">{subtitle}</p>}</div></section>}
