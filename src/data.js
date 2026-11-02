@@ -231,130 +231,180 @@ M.Sc. (Electrical Installations), University of Moratuwa, AMIE(SL)`,
   linkedin: "https://www.linkedin.com/in/engineer-profile/"
   },
   {
-    name: "B. A. Charith Sachintha",
-    role: "Head of Department",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications:
-      "B.Tech.Eng (EEE), JNTU India; M.Sc. (Electrical Installations), University of Moratuwa; AMIE(SL).",
+    name: "Haritha Kalubowila",
+    role: "testing",
+    position: "Technical Lead - Testing & Commissioning / Senior Electrical Engineer",
+    image: "/team/haritha.jpg",
+    qualifications: `B.Sc. Engineering (Hons);
+M.Sc. (Electrical Installations), University of Moratuwa (Reading)`,
+    linkedin: "",
   },
   {
-    name: "G. Sajana Gunasekara",
-    role: "Head of Department",
-    area: "Design Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), University of Moratuwa; AMIE(SL).",
-  },
-  {
-    name: "C. Haritha Kalubowila",
-    role: "Technical Lead",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications:
-      "B.Sc.Eng (Hons), KDU Sri Lanka; M.Sc. (Electrical Installations), University of Moratuwa (reading).",
-  },
-  {
-    name: "Kasun Jayasinghe",
-    role: "Electrical Engineer",
-    area: "Design Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), University of Peradeniya; AMIE(SL).",
+    name: "Nimali Kodithuwakku",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/nimali.jpg",
+    qualifications: `B.Sc. Engineering (Hons), SLTC Research University;
+M.Sc. (Electrical Installations), University of Moratuwa (Reading)`,
+    linkedin: "",
   },
   {
     name: "Dananjaya Gopallawa",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications:
-      "B.Sc.Eng (Hons), Sri Lanka Institute of Information Technology.",
-  },
-  {
-    name: "Hansi Perera",
-    role: "Electrical Engineer",
-    area: "Design Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), KDU Sri Lanka.",
-  },
-  {
-    name: "K. A. Nimali",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications:
-      "B.Sc.Eng (Hons), SLTC Research University; M.Sc. (Electrical Installations), University of Moratuwa (reading).",
-  },
-  {
-    name: "Danuka Athapaththu",
-    role: "Electrical Engineer",
-    area: "Design Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), University of Ruhuna; AMIE(SL).",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/dananjaya.jpg",
+    qualifications: `B.Sc. Engineering (Hons), Sri Lanka Institute of Information Technology (SLIIT);
+Certified Thermographic Surveyor (USA)`,
+    linkedin: "",
   },
   {
     name: "Madhura Pabudanan",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications:
-      "B.Sc.Eng (Hons), University of Ruhuna; PG Dip (Electrical Installations), University of Moratuwa (reading); AMIE(SL).",
-  },
-  {
-    name: "Navindi Kulasena",
-    role: "Electrical Engineer",
-    area: "Design Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), University of Ruhuna; AMIE(SL).",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/madhura.jpg",
+    qualifications: `B.Sc. Engineering (Hons), University of Ruhuna;
+PG Dip. (Electrical Installations), University of Moratuwa (Reading);
+AMIE(SL)`,
+    linkedin: "",
   },
   {
     name: "Chalangana Thanthirimalage",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications:
-      "B.Sc.Eng (Hons), KDU Sri Lanka; PG Dip (Electrical Installations), University of Moratuwa (reading); AMIE(SL).",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/chalangana.jpg",
+    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University;
+M.Sc. (Electrical Installations), University of Moratuwa (Reading);
+AMIE(SL)`,
+    linkedin: "",
   },
   {
-    name: "Dinusha Lakruwan",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), KDU Sri Lanka.",
-  },
-  {
-    name: "Theekshana Nikawaratiya",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), KDU Sri Lanka.",
-  },
-  {
-    name: "Arunalu Ranathunga",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), KDU Sri Lanka.",
+    name: "Theekshana Nikaweratiya",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/theekshana.jpg",
+    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University`,
+    linkedin: "",
   },
   {
     name: "Vinujitha Pindeniya",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), KDU Sri Lanka.",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/vinujitha.jpg",
+    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University`,
+    linkedin: "",
   },
   {
-    name: "Shevon Perera",
-    role: "Engineering Assistant",
-    area: "Testing Division",
-    category: "Engineering Support",
-    qualifications: "HND in Electrical Engineering; B.Sc.Eng (Hons) (reading).",
+    name: "Dinusha Lakruwan",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/lakruwan.jpg",
+    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University`,
+    linkedin: "",
+  },
+  {
+    name: "Arunalu Rathnathunga",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/arunalu.jpg",
+    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University`,
+    linkedin: "",
   },
   {
     name: "Dishan Sanjuka",
-    role: "Electrical Engineer",
-    area: "Testing Division",
-    category: "Engineering Executive",
-    qualifications: "B.Sc.Eng (Hons), University of Ruhuna.",
+    role: "testing",
+    position: "Electrical Engineer - Testing Division",
+    image: "/team/dishan.jpg",
+    qualifications: `B.Sc. Engineering (Hons), University of Ruhuna;
+Diploma in Software Engineering & ICT`,
+    linkedin: "",
   },
+  {
+    name: "Shevon Perera",
+    role: "testing",
+    position: "Engineering Assistant - Testing Division",
+    image: "/team/shevon.jpg",
+    qualifications: `HND, Sri Lanka Telecom Training Centre;
+B.Eng. (Hons), Sri Lanka Institute of Information Technology (Reading)`,
+    linkedin: "",
+  },
+
+
+  {
+    name: "Kasun Jayasinghe",
+    role: "design",
+    position: "Electrical Engineer - Design Division",
+    image: "/team/kasun.jpg",
+    qualifications: `B.Sc. Eng. (Hons), University of Peradeniya;
+AMIE(SL)`,
+    linkedin: "",
+  },
+  {
+    name: "Hansi Perera",
+    role: "design",
+    position: "Electrical Engineer - Design Division",
+    image: "/team/hansi.jpg",
+    qualifications: `B.Sc. Eng. (Hons), General Sir John Kotelawala Defence University`,
+    linkedin: "",
+  },
+  {
+    name: "Danuka Lakshan",
+    role: "design",
+    position: "Electrical Engineer - Design Division",
+    image: "/team/danuka.jpg",
+    qualifications: `B.Sc. Eng. (Hons), University of Ruhuna`,
+    linkedin: "",
+  },
+  {
+    name: "Navindi Kulasena",
+    role: "design",
+    position: "Electrical Engineer - Design Division",
+    image: "/team/navindi.jpg",
+    qualifications: `B.Sc. Eng. (Hons), University of Ruhuna`,
+    linkedin: "",
+  },
+ {
+    name: "Isuri Shavindya",
+    role: "admin",
+    position: "Administration Executive - Testing Division",
+    image: "/team/isuri.jpg",
+    qualifications: `B.BST (Hons) – Food, Fisheries and Agricultural Technology;
+Diploma in Quality Management, Sri Lanka Standards Institution`,
+    linkedin: "",
+  },
+  {
+    name: "Chalani Gunawardana",
+    role: "admin",
+    position: "Administration Executive - Design Division",
+    image: "/team/chalani.jpg",
+    qualifications: `Higher Diploma in Computing & Software Engineering;
+DBM;
+MBA (Reading)`,
+    linkedin: "",
+  },
+
+  // ACCOUNTS DIVISION
+  {
+    name: "Ruchini Vitharana",
+    role: "accounts",
+    position: "Accounts Executive",
+    image: "/team/ruchini.jpg",
+    qualifications: `MAAT;
+HNDA (Business Finance);
+CA - Business Level;
+BB.Mgt (Reading)`,
+    linkedin: "",
+  },
+  {
+    name: "Senura Nethum",
+    role: "accounts",
+    position: "Accounts Assistant",
+    image: "/team/senura.png",
+    qualifications: `AAT Level 2;
+AAT Level 3 (Reading)`,
+    linkedin: "",
+  },
+
+
 ];
 
 export const projects = [
