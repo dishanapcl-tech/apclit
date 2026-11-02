@@ -228,7 +228,7 @@ MSc (Electrical Engineering) – University of Moratuwa (Reading`,
   image: "/team/charith.jpg",
     qualifications: `B.Tech.Eng (EEE), JNTU India; 
 M.Sc. (Electrical Installations), University of Moratuwa, AMIE(SL)`,
-  linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  linkedin: "https://www.linkedin.com/in/charithsachintha?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
   },
   {
     name: "Haritha Kalubowila",
@@ -265,7 +265,7 @@ Certified Thermographic Surveyor (USA)`,
     qualifications: `B.Sc. Engineering (Hons), University of Ruhuna;
 PG Dip. (Electrical Installations), University of Moratuwa (Reading);
 AMIE(SL)`,
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/madhura-pabudanan?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   },
   {
     name: "Chalangana Thanthirimalage",
@@ -282,8 +282,9 @@ AMIE(SL)`,
     role: "testing",
     position: "Electrical Engineer - Testing Division",
     image: "/team/theekshana.jpg",
-    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University`,
-    linkedin: "",
+    qualifications: `B.Sc. Engineering (Hons), General Sir John Kotelawala Defence University,
+AMIE(SL)`,
+    linkedin: "www.linkedin.com/in/theek123",
   },
   {
     name: "Vinujitha Pindeniya",
