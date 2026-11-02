@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -12,6 +13,46 @@ import { Link } from 'react-router-dom'
 import { SectionHeading } from '../components/Layout'
 
 const teamMembers = [
+  // FOUNDER
+   {
+    name: 'D.G. Rienzie Fernando',
+    designation: 'Founder of APCL',
+    title: 'Chartered  Electrical Engineer - Consultant',
+    qualifications: [
+      'Senior Consultant, Charted Electrical Engineer',
+      'B.Sc Eng (Hons), MIE(SL), MECSL',
+    ],
+    memberships: ['MIE(SL)'],
+    initials: 'RF',
+    section: 'Founder',
+    photo: '/team/rienzie.jpeg',
+  },
+
+  // DIRECTOR
+   {
+    name: 'Dinithi Fernando',
+    designation: 'Managing Director - APCL',
+    title: 'Managing Director',
+    initials: 'CS',
+    section: 'Director',
+    photo: '/team/dinithi.jpg',
+  },
+
+  // CEO
+ {
+    name: 'Kaushalya Alpitiarachchi',
+    designation: 'Chief Executive Officer',
+    title: 'Chartered Engineer',
+    qualifications: [
+      'Senior Consultant, Charted Electrical Engineer, Registered Building Services Engineer, Certified Thermographic Surveyor,B.Sc.Eng (Hons) – UoP, PG. Dip (Electrical Installations) – UoM, C.Eng, MIESL, MPMI, MGBCSL',
+    ],
+    memberships: ['AMIE(SL)'],
+    initials: 'CS',
+    section: 'CEO',
+    photo: '/team/kaushalya.jpg',
+  },
+
+  // TESTING DIVISION
   {
     name: 'B. A. Charith Sachintha',
     designation: 'Head of Department – Testing & Commissioning',
@@ -22,7 +63,7 @@ const teamMembers = [
     ],
     memberships: ['AMIE(SL)'],
     initials: 'CS',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/charith.jpg',
   },
   {
@@ -35,7 +76,7 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'HK',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/haritha.jpg',
   },
   {
@@ -48,7 +89,7 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'NK',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/nimali.jpg',
   },
   {
@@ -60,7 +101,7 @@ const teamMembers = [
     ],
     memberships: ['Certified Thermographic Surveyor (USA)'],
     initials: 'DG',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/dananjaya.jpg',
   },
   {
@@ -73,7 +114,7 @@ const teamMembers = [
     ],
     memberships: ['AMIE(SL)'],
     initials: 'MP',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/madhura.jpg',
   },
   {
@@ -86,7 +127,7 @@ const teamMembers = [
     ],
     memberships: ['AMIE(SL)'],
     initials: 'CT',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/chalangana.jpg',
   },
   {
@@ -98,7 +139,7 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'TN',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/theekshana.jpg',
   },
   {
@@ -110,7 +151,7 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'VP',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/vinujitha.jpg',
   },
   {
@@ -122,8 +163,8 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'DL',
-    division: 'Testing Division',
-    photo: '/team/dinusha.jpg',
+    section: 'Testing Division',
+    photo: '/team/lakruwan.jpg',
   },
   {
     name: 'Arunalu Rathnathunga',
@@ -134,7 +175,7 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'AR',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/arunalu.jpg',
   },
   {
@@ -147,7 +188,7 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'DS',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/dishan.jpg',
   },
   {
@@ -160,27 +201,171 @@ const teamMembers = [
     ],
     memberships: [],
     initials: 'SP',
-    division: 'Testing Division',
+    section: 'Testing Division',
     photo: '/team/shevon.jpg',
   },
+
+  // DESIGN DIVISION
+
   {
     name: 'Sajana Gunasekara',
-    designation: 'Head of Department - Design Division',
-    title: 'Electrical Engineer',
+    designation: 'Head of Department – Design Division',
+    title: 'Senior Electrical Engineer',
     qualifications: [
-      'B.Sc. Engineering (Hons) – University of Moratuwa',
+      'B.Sc.Eng(Hons) – University of Moratuwa, AMIE(SL)',
     ],
     memberships: [],
     initials: 'SG',
-    division: 'Design Division',
+    section: 'Design Division',
     photo: '/team/sajana.jpg',
   },
+
+    {
+    name: 'Kasun Jayasinghe',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) - University of Peradeniya, AMIE(SL)',
+    ],
+    memberships: [],
+    initials: 'KJ',
+    section: 'Design Division',
+    photo: '/team/kasun.jpg',
+  },
+
+     {
+    name: 'Hansi Perera',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) – General Sir John Kotelawala Defence University (KDU)',
+    ],
+    memberships: [],
+    initials: 'HP',
+    section: 'Design Division',
+    photo: '/team/hansi.jpg',
+  },
+     {
+    name: 'Danuka Lakshan',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) – University of Ruhuna',
+    ],
+    memberships: [],
+    initials: 'DL',
+    section: 'Design Division',
+    photo: '/team/danuka.jpg',
+  },
+     {
+    name: 'Navindi Kulasena',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) – University of Ruhuna',
+    ],
+    memberships: [],
+    initials: 'NK',
+    section: 'Design Division',
+    photo: '/team/navindi.jpg',
+  },
+  // ADMINISTRATION DIVISION
+  // Add administration staff here using section: 'Administration Division'
+      {
+    name: 'Isuri Shavindya',
+    designation: 'Administration Executive – Testing Division',
+    title: 'Adminstration Executive',
+    qualifications: [
+      'B.BST(Hons) in Food, Fisheries, Agricultural Technology, Diploma in Quality Management - Sri Lanka Standard Institution',
+    ],
+    memberships: [],
+    initials: 'IS',
+    section: 'Administration Division',
+    photo: '/team/isuri.jpg',
+  },
+
+      {
+    name: 'Chalani Gunawardana',
+    designation: 'Administration Executive – Design Division',
+    title: 'Adminstration Executive',
+    qualifications: [
+      'HD in Computing & Software Engineering, DBM, MBA(Reading)',
+    ],
+    memberships: [],
+    initials: 'CG',
+    section: 'Administration Division',
+    photo: '/team/chalani.jpg',
+  },
+
+  // ACCOUNTS DIVISION
+  // Add accounts staff here using section: 'Accounts Division'
+     {
+    name: 'Ruchini Vitharana',
+    designation: 'Accounts Executive',
+    title: 'Accounts Executive',
+    qualifications: [
+      'MAAT, HNDA(Business Finance), CA - Business level, BB.Mgt(Reading)',
+    ],
+    memberships: [],
+    initials: 'RV',
+    section: 'Accounts Division',
+    photo: '/team/ruchini.jpg',
+  },
+{
+    name: 'Senura Nethum',
+    designation: 'Accounts Assistant',
+    title: 'Accounts Assistant',
+    qualifications: [
+      'AAT (Level 2), Level 3 (Reading)',
+    ],
+    memberships: [],
+    initials: 'RV',
+    section: 'Accounts Division',
+    photo: '/team/senura.png',
+  }
+
 ]
 
-const divisions = [
-  'All Members',
-  'Design Division',
-  'Testing Division',
+const sections = [
+  {
+    title: 'Founder',
+    description: 'The founder behind APCL’s vision and development.',
+    icon: Award,
+  },
+  {
+    title: 'Director',
+    description: 'Leadership, strategic direction and corporate governance.',
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: 'CEO',
+    description: 'Executive leadership and overall company management.',
+    icon: Users,
+  },
+  {
+    title: 'Testing Division',
+    description:
+      'Electrical testing, commissioning, inspections and condition assessments.',
+    icon: GraduationCap,
+  },
+  {
+    title: 'Design Division',
+    description:
+      'Electrical engineering design, consultancy and technical solutions.',
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: 'Administration Division',
+    description:
+      'Administrative coordination and operational support.',
+    icon: Users,
+  },
+  {
+    title: 'Accounts Division',
+    description:
+      'Financial administration, accounting and related services.',
+    icon: BriefcaseBusiness,
+  },
 ]
 
 function MemberCard({ member }) {
@@ -200,10 +385,9 @@ function MemberCard({ member }) {
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl">
       <div className="h-1.5 bg-[#123b64] transition-colors group-hover:bg-amber-400" />
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex items-start gap-4">
-          {/* Staff photo with automatic initials fallback */}
-          <div className="h-50 w-50shrink-0 overflow-hidden bg-[#eaf1f8] text-xl font-black text-[#123b64] transition group-hover:bg-amber-100">
+          <div className="h-28 w-28 shrink-0 overflow-hidden rounded-xl bg-[#eaf1f8] text-xl font-black text-[#123b64] transition group-hover:bg-amber-100 sm:h-32 sm:w-32">
             {member.photo && !imageFailed ? (
               <img
                 src={member.photo}
@@ -221,7 +405,7 @@ function MemberCard({ member }) {
 
           <div className="min-w-0">
             <span className="inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-amber-800">
-              {member.division}
+              {member.section}
             </span>
 
             <h3 className="mt-2 text-lg font-extrabold leading-snug text-[#123b64]">
@@ -234,29 +418,34 @@ function MemberCard({ member }) {
           </div>
         </div>
 
-        <div className="mt-6 border-t border-slate-100 pt-5">
-          <div className="flex items-center gap-2 text-sm font-extrabold text-[#123b64]">
-            <GraduationCap size={18} className="shrink-0 text-amber-600" />
-            Qualifications
+        {member.qualifications?.length > 0 && (
+          <div className="mt-6 border-t border-slate-100 pt-5">
+            <div className="flex items-center gap-2 text-sm font-extrabold text-[#123b64]">
+              <GraduationCap
+                size={18}
+                className="shrink-0 text-amber-600"
+              />
+              Qualifications
+            </div>
+
+            <ul className="mt-3 space-y-2.5">
+              {member.qualifications.map((qualification) => (
+                <li
+                  key={qualification}
+                  className="flex items-start gap-2 text-sm leading-6 text-slate-600"
+                >
+                  <ChevronRight
+                    size={16}
+                    className="mt-1 shrink-0 text-amber-600"
+                  />
+                  <span>{qualification}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+        )}
 
-          <ul className="mt-3 space-y-2.5">
-            {member.qualifications.map((qualification) => (
-              <li
-                key={qualification}
-                className="flex items-start gap-2 text-sm leading-6 text-slate-600"
-              >
-                <ChevronRight
-                  size={16}
-                  className="mt-1 shrink-0 text-amber-600"
-                />
-                <span>{qualification}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {member.memberships.length > 0 && (
+        {member.memberships?.length > 0 && (
           <div className="mt-5 border-t border-slate-100 pt-4">
             <div className="flex items-center gap-2 text-sm font-extrabold text-[#123b64]">
               <Award size={17} className="shrink-0 text-amber-600" />
@@ -289,29 +478,25 @@ function MemberCard({ member }) {
 
 export default function TestingTeam() {
   const [search, setSearch] = useState('')
-  const [activeDivision, setActiveDivision] = useState('All Members')
 
-  const filteredMembers = teamMembers.filter((member) => {
-    const query = search.trim().toLowerCase()
+  const query = search.trim().toLowerCase()
 
-    const matchesSearch = [
+  const filteredMembers = teamMembers.filter((member) =>
+    [
       member.name,
       member.designation,
       member.title,
-      member.division,
-      ...member.qualifications,
-      ...member.memberships,
+      member.section,
+      ...(member.qualifications || []),
+      ...(member.memberships || []),
     ]
       .join(' ')
       .toLowerCase()
-      .includes(query)
+      .includes(query),
+  )
 
-    const matchesDivision =
-      activeDivision === 'All Members' ||
-      member.division === activeDivision
-
-    return matchesSearch && matchesDivision
-  })
+  const getSectionMembers = (sectionTitle) =>
+    filteredMembers.filter((member) => member.section === sectionTitle)
 
   return (
     <>
@@ -323,21 +508,21 @@ export default function TestingTeam() {
           <div className="max-w-3xl">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[.14em] text-amber-200">
               <span className="h-2 w-2 rounded-full bg-amber-400" />
-              Our People · Design & Testing Division
+              Our People · Amithi Power Consultants
             </p>
 
             <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              The expertise behind
+              The people behind
               <span className="block text-amber-300">
-                every test and inspection.
+                our engineering excellence.
               </span>
             </h1>
 
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-200 md:text-lg">
-              Meet the engineering team at Amithi Power Consultants (Pvt) Ltd.
-              Our Design and Testing Divisions support electrical projects
-              through engineering design, testing, inspection, condition
-              assessment and technical reporting.
+              Meet the people at Amithi Power Consultants (Pvt) Ltd.
+              From company leadership to our engineering, administration
+              and accounts teams, our people work together to deliver
+              professional electrical engineering services.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -360,7 +545,7 @@ export default function TestingTeam() {
         </div>
       </section>
 
-      {/* Team introduction */}
+      {/* Introduction */}
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:grid-cols-3 md:px-6">
           <div className="flex items-start gap-4">
@@ -372,7 +557,7 @@ export default function TestingTeam() {
                 Experienced Leadership
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">
-                Technical direction and engineering oversight.
+                Leadership and strategic direction across the company.
               </p>
             </div>
           </div>
@@ -383,10 +568,11 @@ export default function TestingTeam() {
             </div>
             <div>
               <h2 className="font-extrabold text-[#123b64]">
-                Qualified Engineers
+                Qualified Professionals
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">
-                Academic training and technical development.
+                Engineering expertise, academic qualifications and
+                technical development.
               </p>
             </div>
           </div>
@@ -397,31 +583,31 @@ export default function TestingTeam() {
             </div>
             <div>
               <h2 className="font-extrabold text-[#123b64]">
-                Professional Standards
+                One Team
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">
-                Professional memberships and specialist credentials.
+                Different divisions working together to support our clients.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team directory */}
+      {/* All divisions on the same page */}
       <section
         id="team-members"
-        className="bg-slate-50 py-20 md:py-24"
+        className="bg-slate-50 py-16 md:py-24"
       >
         <div className="mx-auto max-w-7xl px-5 md:px-6">
           <SectionHeading
             eyebrow="Our People"
-            title="Meet our technical team."
-            text="Explore the qualifications and professional credentials of our Design and Testing Division personnel."
+            title="Meet our team."
+            text="Explore our leadership and the people across each division at APCL."
           />
 
-          {/* Search and result count */}
-          <div className="mt-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="relative w-full lg:max-w-md">
+          {/* Search */}
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative w-full sm:max-w-md">
               <Search
                 size={19}
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -430,68 +616,106 @@ export default function TestingTeam() {
                 type="search"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search name, qualification..."
+                placeholder="Search name, qualification or division..."
                 aria-label="Search team members"
                 className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-12 pr-4 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
               />
             </div>
 
             <p className="text-sm font-semibold text-slate-500">
-              Showing {filteredMembers.length} of {teamMembers.length} team
-              members
+              Showing {filteredMembers.length} of {teamMembers.length} team members
             </p>
           </div>
 
-          {/* Division filters */}
-          <div className="mt-5 flex flex-wrap gap-2">
-            {divisions.map((division) => (
-              <button
-                key={division}
-                type="button"
-                onClick={() => setActiveDivision(division)}
-                aria-pressed={activeDivision === division}
-                className={`rounded-full px-4 py-2.5 text-sm font-bold transition ${
-                  activeDivision === division
-                    ? 'bg-[#123b64] text-white'
-                    : 'border border-slate-200 bg-white text-slate-600 hover:border-amber-400 hover:text-[#123b64]'
-                }`}
-              >
-                {division}
-              </button>
-            ))}
+          {/* Sections in the requested order */}
+          <div className="mt-12 space-y-16">
+            {sections.map((section) => {
+              const members = getSectionMembers(section.title)
+              const SectionIcon = section.icon
+
+              // Keep the section visible while searching if it has matches.
+              // Empty sections remain visible when the search is blank.
+              if (query && members.length === 0) return null
+
+              return (
+                <section
+                  key={section.title}
+                  aria-labelledby={`section-${section.title
+                    .toLowerCase()
+                    .replaceAll(' ', '-')}`}
+                  className="scroll-mt-8"
+                >
+                  <div className="mb-6 flex items-start gap-4 border-b border-slate-200 pb-5">
+                    <div className="rounded-xl bg-amber-50 p-3 text-amber-700">
+                      <SectionIcon size={25} />
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h2
+                          id={`section-${section.title
+                            .toLowerCase()
+                            .replaceAll(' ', '-')}`}
+                          className="text-2xl font-black text-[#123b64] sm:text-3xl"
+                        >
+                          {section.title}
+                        </h2>
+
+                        <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-500 ring-1 ring-slate-200">
+                          {members.length}{' '}
+                          {members.length === 1 ? 'Member' : 'Members'}
+                        </span>
+                      </div>
+
+                      <p className="mt-2 text-sm leading-6 text-slate-500">
+                        {section.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {members.length > 0 ? (
+                    <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                      {members.map((member) => (
+                        <MemberCard
+                          key={member.name}
+                          member={member}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="rounded-xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center">
+                      <Users
+                        size={28}
+                        className="mx-auto text-slate-300"
+                      />
+                      <p className="mt-3 text-sm font-semibold text-slate-500">
+                        Team details will be added to this section.
+                      </p>
+                    </div>
+                  )}
+                </section>
+              )
+            })}
+
+            {query && filteredMembers.length === 0 && (
+              <div className="rounded-2xl border border-slate-200 bg-white px-6 py-16 text-center">
+                <Users size={34} className="mx-auto text-slate-300" />
+                <h3 className="mt-4 text-lg font-extrabold text-[#123b64]">
+                  No team members found
+                </h3>
+                <p className="mt-2 text-sm text-slate-500">
+                  Try another name, qualification or division.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSearch('')}
+                  className="mt-5 font-bold text-amber-700 hover:text-[#123b64]"
+                >
+                  Clear search
+                </button>
+              </div>
+            )}
           </div>
-
-          {/* Member cards */}
-          {filteredMembers.length > 0 ? (
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredMembers.map((member) => (
-                <MemberCard key={member.name} member={member} />
-              ))}
-            </div>
-          ) : (
-            <div className="mt-10 rounded-2xl border border-slate-200 bg-white px-6 py-16 text-center">
-              <Users size={34} className="mx-auto text-slate-300" />
-
-              <h3 className="mt-4 text-lg font-extrabold text-[#123b64]">
-                No team members found
-              </h3>
-
-              <p className="mt-2 text-sm text-slate-500">
-                Try another name, qualification or division.
-              </p>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setSearch('')
-                  setActiveDivision('All Members')
-                }}
-                className="mt-5 font-bold text-amber-700 hover:text-[#123b64]"
-              >
-                Clear filters
-              </button>
-            </div>
-          )}
         </div>
       </section>
 

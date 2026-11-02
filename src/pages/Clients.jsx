@@ -31,8 +31,8 @@ export default function Clients() {
             ))}
           </div>
           <p className="mt-8 text-xs leading-6 text-slate-500">
-            Obtain permissions for client names and logos and confirm wording
-            with company management before publishing.
+            {/* Obtain permissions for client names and logos and confirm wording
+            with company management before publishing. */}
           </p>
         </div>
       </section>
