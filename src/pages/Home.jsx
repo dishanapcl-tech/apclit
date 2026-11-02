@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -14,6 +14,7 @@ import {
   Lightbulb,
   Gauge,
   Leaf,
+  ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import { projects } from "../data";
@@ -234,7 +235,10 @@ function HeroSlider() {
               className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-md bg-white px-6 py-4 text-sm font-bold text-[#123b64] transition hover:bg-sky-100"
             >
               {slide.cta}
-              <ArrowUpRight size={18} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ArrowUpRight
+                size={18}
+                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </Link>
             <Link
               to="/contact"
@@ -254,6 +258,30 @@ function HeroSlider() {
 }
 
 export default function Home() {
+  const projectCarouselRef = useRef(null);
+  const [projectCarouselPaused, setProjectCarouselPaused] = useState(false);
+  const projectScrollAmount = 420;
+
+  useEffect(() => {
+    if (projectCarouselPaused || projects.length < 2) return undefined;
+
+    const timer = window.setInterval(() => {
+      const carousel = projectCarouselRef.current;
+      if (!carousel) return;
+
+      const atEnd =
+        carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 8;
+
+      if (atEnd) {
+        carousel.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        carousel.scrollBy({ left: projectScrollAmount, behavior: "smooth" });
+      }
+    }, 2500);
+
+    return () => window.clearInterval(timer);
+  }, [projectCarouselPaused]);
+
   return (
     <>
       <HeroSlider />
@@ -261,9 +289,21 @@ export default function Home() {
       <section className="border-b border-blue-100 bg-white">
         <div className="mx-auto grid max-w-[1440px] gap-0 px-5 sm:grid-cols-3 sm:px-8 lg:px-14">
           {[
-            { Icon: DraftingCompass, title: "Engineering Design", text: "Plan with technical clarity." },
-            { Icon: Activity, title: "Testing & Commissioning", text: "Decisions supported by data." },
-            { Icon: ShieldCheck, title: "Quality & afety", text: "Understand risk and asset condition." },
+            {
+              Icon: DraftingCompass,
+              title: "Engineering Design",
+              text: "Plan with technical clarity.",
+            },
+            {
+              Icon: Activity,
+              title: "Testing & Commissioning",
+              text: "Decisions supported by data.",
+            },
+            {
+              Icon: ShieldCheck,
+              title: "Quality & afety",
+              text: "Understand risk and asset condition.",
+            },
           ].map(({ Icon, title, text }, index) => (
             <div
               key={title}
@@ -364,29 +404,52 @@ export default function Home() {
                 About Amithi Power Consultants
               </h2>
               <p className="mt-3 text-base font-bold italic leading-7 text-[#17558e] sm:text-lg">
-                Engineering Excellence. Powering a Safer, Smarter, and More Sustainable Future.
+                Engineering Excellence. Powering a Safer, Smarter, and More
+                Sustainable Future.
               </p>
 
               <div className="mt-6 space-y-3 text-justify text-sm leading-[1.45] text-slate-900 sm:text-[15px]">
                 <p>
-                  Established in 2002 and registered in 2004, <strong>Amithi Power Consultants (Pvt) Ltd (APCL)</strong> is a pioneering electrical engineering consultancy in Sri Lanka, founded by the late <strong>Eng. Rienzie Fernando</strong>, former Chief Engineer (Transmission Maintenance) of the Ceylon Electricity Board.
+                  Established in 2002 and registered in 2004,{" "}
+                  <strong>Amithi Power Consultants (Pvt) Ltd (APCL)</strong> is
+                  a pioneering electrical engineering consultancy in Sri Lanka,
+                  founded by the late <strong>Eng. Rienzie Fernando</strong>,
+                  former Chief Engineer (Transmission Maintenance) of the Ceylon
+                  Electricity Board.
                 </p>
                 <p>
-                  Building upon his vision and engineering legacy, APCL has grown into a trusted engineering consultancy with over two decades of experience in electrical power engineering, building services, testing, commissioning, and energy consultancy.
+                  Building upon his vision and engineering legacy, APCL has
+                  grown into a trusted engineering consultancy with over two
+                  decades of experience in electrical power engineering,
+                  building services, testing, commissioning, and energy
+                  consultancy.
                 </p>
                 <p>
-                  We deliver comprehensive engineering solutions to utilities, industrial facilities, commercial developments, and infrastructure projects in Sri Lanka and internationally. Our expertise encompasses engineering design, power system studies, electrical safety and energy audits, testing and commissioning, renewable energy integration, and specialized engineering consultancy.
+                  We deliver comprehensive engineering solutions to utilities,
+                  industrial facilities, commercial developments, and
+                  infrastructure projects in Sri Lanka and internationally. Our
+                  expertise encompasses engineering design, power system
+                  studies, electrical safety and energy audits, testing and
+                  commissioning, renewable energy integration, and specialized
+                  engineering consultancy.
                 </p>
                 <p>
-                  Supported by experienced professional engineers, advanced engineering software, and specialized testing instruments, we are committed to delivering technically sound, economically viable, and quality-driven solutions that enhance the safety, reliability, and efficiency of electrical systems.
+                  Supported by experienced professional engineers, advanced
+                  engineering software, and specialized testing instruments, we
+                  are committed to delivering technically sound, economically
+                  viable, and quality-driven solutions that enhance the safety,
+                  reliability, and efficiency of electrical systems.
                 </p>
                 <p>
-                  At APCL, we continue to uphold our founder's vision through engineering excellence, professional integrity, and an unwavering commitment to our clients.
+                  At APCL, we continue to uphold our founder's vision through
+                  engineering excellence, professional integrity, and an
+                  unwavering commitment to our clients.
                 </p>
               </div>
 
               <p className="mt-5 border-l-4 border-[#1769aa] pl-4 text-base font-bold italic leading-7 text-[#174d85] sm:text-lg">
-                Amithi Power Consultants — Trusted Expertise. Proven Engineering. Lasting Value.
+                Amithi Power Consultants — Trusted Expertise. Proven
+                Engineering. Lasting Value.
               </p>
 
               <Link
@@ -401,7 +464,7 @@ export default function Home() {
       </section>
 
       {/* SERVICES — four main APCL service categories */}
-      <section className="bg-[#f3f7fb] py-20 sm:py-24" id="services">
+      <section className="bg-[#f3f7fb] py-20 sm:py-5" id="services">
         <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
           <div className="mx-auto mb-12 max-w-4xl text-center">
             <h2 className="font-sans text-4xl font-extrabold leading-tight tracking-[-0.045em] text-[#123b64] sm:text-5xl md:text-6xl lg:text-7xl">
@@ -411,79 +474,155 @@ export default function Home() {
           </div>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {serviceGroups.map(({ Icon, title, description, image, fallback, href }) => (
-              <Link
-                key={title}
-                to={href}
-                className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-[0_20px_45px_rgba(18,59,100,0.13)]"
-              >
-                <div className="relative h-52 overflow-hidden bg-blue-100">
-                  <Photo
-                    src={image}
-                    fallback={fallback}
-                    alt={title}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#08294b]/75 via-[#08294b]/10 to-transparent" />
-                  <span className="absolute bottom-4 left-4 grid h-11 w-11 place-items-center rounded-lg bg-white text-[#123b64] shadow-md">
-                    <Icon size={21} strokeWidth={1.8} />
-                  </span>
-                </div>
+            {serviceGroups.map(
+              ({ Icon, title, description, image, fallback, href }) => (
+                <Link
+                  key={title}
+                  to={href}
+                  className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-blue-100 bg-white shadow-sm transition duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-[0_20px_45px_rgba(18,59,100,0.13)]"
+                >
+                  <div className="relative h-52 overflow-hidden bg-blue-100">
+                    <Photo
+                      src={image}
+                      fallback={fallback}
+                      alt={title}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#08294b]/75 via-[#08294b]/10 to-transparent" />
+                    <span className="absolute bottom-4 left-4 grid h-11 w-11 place-items-center rounded-lg bg-white text-[#123b64] shadow-md">
+                      <Icon size={21} strokeWidth={1.8} />
+                    </span>
+                  </div>
 
-                <div className="flex flex-1 flex-col p-5 sm:p-6">
-                  <h3 className="text-xl font-bold leading-snug text-[#123b64]">
-                    {title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-500">
-                    {description}
-                  </p>
-                </div>
-              </Link>
-            ))}
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <h3 className="text-xl font-bold leading-snug text-[#123b64]">
+                      {title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-500">
+                      {description}
+                    </p>
+                  </div>
+                </Link>
+              ),
+            )}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 sm:py-24">
-        <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
-          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-            <div className="max-w-2xl">
-              <p className="mb-4 text-xs font-extrabold uppercase tracking-[0.22em] text-blue-700">
-                Selected projects
-              </p>
-              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.035em] text-[#123b64] sm:text-4xl lg:text-5xl">
-                Engineering across critical environments.
+      {/* KEY PROJECTS — auto-scrolling project carousel */}
+      <section className="relative overflow-hidden bg-[#f3f7fb] py-20 sm:py-16">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-100/60 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-sky-100/70 blur-3xl" />
+
+        <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-14">
+          <div className="mb-10 flex flex-col items-center justify-between gap-5 sm:flex-row">
+            <div className="text-center sm:text-left">
+              <h2 className="text-4xl font-extrabold leading-tight tracking-[-0.045em] text-[#123b64] sm:text-5xl lg:text-6xl">
+                Key Projects
               </h2>
-              <p className="mt-5 text-base leading-7 text-slate-600">
-                A selection of project experience and facilities supported by APCL.
-              </p>
+              <div className="mx-auto mt-5 h-1.5 w-20 rounded-full bg-blue-700 sm:mx-0" />
             </div>
-            <Link
-              to="/projects"
-              className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-[#123b64] transition hover:text-blue-700"
-            >
-              View all projects <ArrowUpRight size={18} />
-            </Link>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Scroll projects left"
+                onClick={() =>
+                  projectCarouselRef.current?.scrollBy({
+                    left: -projectScrollAmount,
+                    behavior: "smooth",
+                  })
+                }
+                className="grid h-11 w-11 place-items-center rounded-full border border-blue-200 bg-white text-[#123b64] shadow-sm transition hover:bg-blue-50"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                aria-label="Scroll projects right"
+                onClick={() =>
+                  projectCarouselRef.current?.scrollBy({
+                    left: projectScrollAmount,
+                    behavior: "smooth",
+                  })
+                }
+                className="grid h-11 w-11 place-items-center rounded-full border border-blue-200 bg-white text-[#123b64] shadow-sm transition hover:bg-blue-50"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {projects.slice(0, 3).map((project) => (
-              <article key={project.title} className="group overflow-hidden border border-blue-100 bg-white transition hover:shadow-xl">
-                <div className="overflow-hidden">
+          <div
+            ref={projectCarouselRef}
+            onMouseEnter={() => setProjectCarouselPaused(true)}
+            onMouseLeave={() => setProjectCarouselPaused(false)}
+            onFocus={() => setProjectCarouselPaused(true)}
+            onBlur={() => setProjectCarouselPaused(false)}
+            className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 [scrollbar-width:thin] [scrollbar-color:#b7cce0_transparent]"
+          >
+            {projects.map((project) => (
+              <article
+                key={project.title}
+                className="group flex w-[85%] min-w-0 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_20px_45px_rgba(18,59,100,0.14)] sm:w-[48%] lg:w-[32%]"
+              >
+                <div className="relative h-56 overflow-hidden bg-blue-100">
                   <Photo
                     src={project.image}
                     fallback="https://images.unsplash.com/photo-1473341304170-971b4b8c5c4a?auto=format&fit=crop&w=1200&q=80"
                     alt={project.title}
-                    className="h-56 w-full object-cover transition duration-700 group-hover:scale-105"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#08294b]/65 via-transparent to-transparent" />
                 </div>
-                <div className="p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600">{project.type}</p>
-                  <h3 className="mt-3 text-lg font-bold leading-snug text-[#123b64]">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-500">{project.description}</p>
+
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <h3 className="text-center text-lg font-bold leading-snug text-[#123b64] sm:text-xl">
+                    {project.title}
+                  </h3>
+
+                  {project.description?.trim() && (
+                    <div className="mt-4 flex-1">
+                      {(() => {
+                        const points = project.description
+                          .split("\\n")
+                          .map((item) => item.trim())
+                          .filter(Boolean);
+
+                        if (points.length === 1) {
+                          return (
+                            <p className="text-center text-sm leading-6 text-slate-600">
+                              {points[0]}
+                            </p>
+                          );
+                        }
+
+                        return (
+                          <ul className="mx-auto w-fit space-y-2 text-left text-sm leading-6 text-slate-600">
+                            {points.map((item, index) => (
+                              <li key={index} className="flex items-start gap-2">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1769aa]" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        );
+                      })()}
+                    </div>
+                  )}
+                  <div className="mt-5 h-px bg-blue-100" />
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              to="/projects"
+              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-[#1769aa] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#12558c]"
+            >
+              View All Projects <ArrowRight size={17} />
+            </Link>
           </div>
         </div>
       </section>
@@ -498,7 +637,8 @@ export default function Home() {
               Have an engineering challenge?
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-blue-100/75 sm:text-base">
-              Tell us about your project requirements and speak with the APCL team.
+              Tell us about your project requirements and speak with the APCL
+              team.
             </p>
           </div>
           <Link

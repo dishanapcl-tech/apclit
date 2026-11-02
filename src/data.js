@@ -307,14 +307,14 @@ export const team = [
 
 export const projects = [
   {
-    title: "Colombo Port City",
-    type: "Electrical Power",
+    title: "Design Consultancy for Colombo Port City",
+    type: "",
     image: "/images/project-colombo-port-city.jpeg",
     description:
-      "Local electrical consultancy, MV system design, electrical demand calculations and design reviews for utility tunnel and 33 kV distribution systems.",
+      "Local Electrical Consultant – MV System Design\nDesign Review of Utility Tunnel (Mechanical, Electrical, Plumbing, Vehicular & Footbridge Lighting Design)"
   },
   {
-    title: "220 kV Interconnection Transmission Line — Hambantota",
+    title: "220 kV Interconnection Transmission Line for LNG Power Plant— Hambantota",
     type: "Electrical Power",
     image: "/images/project-transmission-line.jpeg",
     description:
