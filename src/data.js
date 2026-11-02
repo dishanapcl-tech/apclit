@@ -154,29 +154,81 @@ export const testingServices = [
 ];
 
 export const team = [
+  // {
+  // name: "D.G. Rienzie Fernando",
+  // role: "Founder",
+  // image: "/team/rienzie.jpeg",
+  // qualifications: "B.Sc. Eng. (Electrical), MIE(SL)",
+  // linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  // },
   {
-    name: "R. Kaushalya Alpitiarachchi",
-    role: "Chief Operating Officer / Consultant",
-    area: "Electrical & Building Services",
-    category: "Executive Consultant",
-    image: "/images/ceo-kaushalya-alpitiarachchi.jpeg",
-    qualifications:
-      "B.Sc.Eng (Hons), University of Peradeniya; PG Dip (Electrical Installations), University of Moratuwa; C.Eng, MIESL, MPMI; Member, Green Building Council Sri Lanka; Certified Thermographer; Recognized Building Services Engineer (IESL).",
+  name: "D.G. Rienzie Fernando",
+  role: "Founder",
+  position: "Founder / Former Managing Director / Senior Consultant",
+  image: "/team/rienzie.jpeg",
+    qualifications: `Senior Consultant, Chartered Electrical Engineer
+B.Sc. Eng. (Hons), MIE(SL), MECSL`,
+  linkedin: "https://www.linkedin.com/in/engineer-profile/"
   },
   {
-    name: "K. Laksith Uchitha Sirisena",
-    role: "Consultant",
-    area: "Electrical",
-    category: "Executive Consultant",
-    qualifications:
-      "B.Sc.Eng (Hons), University of Moratuwa; Cert (HRM); M.Sc. (Electrical Installations), University of Moratuwa; C.Eng, MIESL; Visiting Lecturer; Certified Thermographer Level 2 (USA).",
+  name: "Dinithi Fernando",
+  role: "Managing Director",
+  image: "/team/Dinithi.jpeg",
+  qualifications: `MBA - University of Kelaniya, BBM - University of Mangalore
+CIMA (Operational Level)[Reading]`,
+  // linkedin: "https://www.linkedin.com/in/engineer-profile/"
   },
-  {
-    name: "Lalith De Silva",
-    role: "Senior Consultant",
-    area: "Mechanical",
-    category: "Non-Executive Consultant",
-    qualifications: "B.Sc.Eng (Hons), University of Moratuwa; C.Eng, MIESL.",
+{
+  name: "Anusha Udayanga",
+  role: "Director",
+  position: "Director",
+  image: "/team/Anusha .jpeg",
+    qualifications: ``,
+  linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  },
+    {
+  name: "Kaushalya Alpitiarachchi",
+  role: "ceo",
+  position: "Chief Executive Officer / Senior Consultant",
+  image: "/team/kaushalya.jpg",
+    qualifications: `Senior Consultant, Chartered Electrical Engineer
+Registered Building Services Engineer, Certified Thermographic Surveyor,
+B.Sc.Eng (Hons) – UoP, PG. Dip (Electrical Installations) – UoM, 
+C.Eng, MIESL, MPMI, MGBCSL`,
+  linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  },
+  // {
+  //   name: "K. Laksith Uchitha Sirisena",
+  //   role: "Consultant",
+  //   area: "Electrical",
+  //   category: "Executive Consultant",
+  //   qualifications:
+  //     "B.Sc.Eng (Hons), University of Moratuwa; Cert (HRM); M.Sc. (Electrical Installations), University of Moratuwa; C.Eng, MIESL; Visiting Lecturer; Certified Thermographer Level 2 (USA).",
+  // },
+  // {
+  //   name: "Lalith De Silva",
+  //   role: "Senior Consultant",
+  //   area: "Mechanical",
+  //   category: "Non-Executive Consultant",
+  //   qualifications: "B.Sc.Eng (Hons), University of Moratuwa; C.Eng, MIESL.",
+  // },
+      {
+  name: "Sajana Gunasekara",
+  role: "design",
+  position: "Head of Department - Design / Senior Electrical Engineer",
+  image: "/team/sajana.jpg",
+    qualifications: `B.Sc.Eng(Hons) – University of Moratuwa, AMIE(SL)
+MSc (Electrical Engineering) – University of Moratuwa (Reading`,
+  linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  },
+{
+  name: "B. A. Charith Sachintha",
+  role: "testing",
+  position: "Head of Department - Testing / Senior Electrical Engineer",
+  image: "/team/charith.jpg",
+    qualifications: `B.Tech.Eng (EEE), JNTU India; 
+M.Sc. (Electrical Installations), University of Moratuwa, AMIE(SL)`,
+  linkedin: "https://www.linkedin.com/in/engineer-profile/"
   },
   {
     name: "B. A. Charith Sachintha",

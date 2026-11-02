@@ -1,746 +1,316 @@
 
-import { useState } from 'react'
-import {
-  ArrowRight,
-  Search,
-  Users,
-  GraduationCap,
-  Award,
-  BriefcaseBusiness,
-  ChevronRight,
-} from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { SectionHeading } from '../components/Layout'
+import { useMemo } from "react";
+import { Linkedin } from "lucide-react";
+import { PageHero } from "../components/Layout";
+import { team } from "../data";
 
-const teamMembers = [
-  // FOUNDER
-   {
-    name: 'D.G. Rienzie Fernando',
-    designation: 'Founder of APCL',
-    title: 'Chartered  Electrical Engineer - Consultant',
-    qualifications: [
-      'Senior Consultant, Charted Electrical Engineer',
-      'B.Sc Eng (Hons), MIE(SL), MECSL',
-    ],
-    memberships: ['MIE(SL)'],
-    initials: 'RF',
-    section: 'Founder',
-    photo: '/team/rienzie.jpeg',
-  },
+const normalize = (value = "") =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
-  // DIRECTOR
-   {
-    name: 'Dinithi Fernando',
-    designation: 'Managing Director - APCL',
-    title: 'Managing Director',
-    initials: 'CS',
-    section: 'Director',
-    photo: '/team/dinithi.jpg',
-  },
+const getRole = (person) =>
+  normalize(person.role || person.category || person.area || "");
 
-  // CEO
- {
-    name: 'Kaushalya Alpitiarachchi',
-    designation: 'Chief Executive Officer',
-    title: 'Chartered Engineer',
-    qualifications: [
-      'Senior Consultant, Charted Electrical Engineer, Registered Building Services Engineer, Certified Thermographic Surveyor,B.Sc.Eng (Hons) – UoP, PG. Dip (Electrical Installations) – UoM, C.Eng, MIESL, MPMI, MGBCSL',
-    ],
-    memberships: ['AMIE(SL)'],
-    initials: 'CS',
-    section: 'CEO',
-    photo: '/team/kaushalya.jpg',
-  },
+const includesAny = (value, terms) =>
+  terms.some((term) => value.includes(normalize(term)));
 
-  // TESTING DIVISION
-  {
-    name: 'B. A. Charith Sachintha',
-    designation: 'Head of Department – Testing & Commissioning',
-    title: 'Senior Electrical Engineer',
-    qualifications: [
-      'B.Eng (EEE) – JNTUA, India',
-      'MSc (Electrical Installations) – University of Moratuwa',
-    ],
-    memberships: ['AMIE(SL)'],
-    initials: 'CS',
-    section: 'Testing Division',
-    photo: '/team/charith.jpg',
-  },
-  {
-    name: 'Haritha Kalubowila',
-    designation: 'Technical Lead – Testing & Commissioning',
-    title: 'Senior Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons)',
-      'MSc (Electrical Installations) – University of Moratuwa (Reading)',
-    ],
-    memberships: [],
-    initials: 'HK',
-    section: 'Testing Division',
-    photo: '/team/haritha.jpg',
-  },
-  {
-    name: 'Nimali Kodithuwakku',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – SLTC Research University',
-      'MSc (Electrical Installations) – University of Moratuwa (Reading)',
-    ],
-    memberships: [],
-    initials: 'NK',
-    section: 'Testing Division',
-    photo: '/team/nimali.jpg',
-  },
-  {
-    name: 'Dananjaya Gopallawa',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – Sri Lanka Institute of Information Technology (SLIIT)',
-    ],
-    memberships: ['Certified Thermographic Surveyor (USA)'],
-    initials: 'DG',
-    section: 'Testing Division',
-    photo: '/team/dananjaya.jpg',
-  },
-  {
-    name: 'Madhura Pabudanan',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – University of Ruhuna',
-      'PG Dip. (Electrical Installations) – University of Moratuwa (Reading)',
-    ],
-    memberships: ['AMIE(SL)'],
-    initials: 'MP',
-    section: 'Testing Division',
-    photo: '/team/madhura.jpg',
-  },
-  {
-    name: 'Chalangana Thanthirimalage',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – General Sir John Kotelawala Defence University',
-      'MSc (Electrical Installations) – University of Moratuwa (Reading)',
-    ],
-    memberships: ['AMIE(SL)'],
-    initials: 'CT',
-    section: 'Testing Division',
-    photo: '/team/chalangana.jpg',
-  },
-  {
-    name: 'Theekshana Nikaweratiya',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – General Sir John Kotelawala Defence University',
-    ],
-    memberships: [],
-    initials: 'TN',
-    section: 'Testing Division',
-    photo: '/team/theekshana.jpg',
-  },
-  {
-    name: 'Vinujitha Pindeniya',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – General Sir John Kotelawala Defence University',
-    ],
-    memberships: [],
-    initials: 'VP',
-    section: 'Testing Division',
-    photo: '/team/vinujitha.jpg',
-  },
-  {
-    name: 'Dinusha Lakruwan',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – General Sir John Kotelawala Defence University',
-    ],
-    memberships: [],
-    initials: 'DL',
-    section: 'Testing Division',
-    photo: '/team/lakruwan.jpg',
-  },
-  {
-    name: 'Arunalu Rathnathunga',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – General Sir John Kotelawala Defence University',
-    ],
-    memberships: [],
-    initials: 'AR',
-    section: 'Testing Division',
-    photo: '/team/arunalu.jpg',
-  },
-  {
-    name: 'Dishan Sanjuka',
-    designation: 'Electrical Engineer – Testing Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc. Engineering (Hons) – University of Ruhuna',
-      'Diploma in Software Engineering & ICT',
-    ],
-    memberships: [],
-    initials: 'DS',
-    section: 'Testing Division',
-    photo: '/team/dishan.jpg',
-  },
-  {
-    name: 'Shevon Perera',
-    designation: 'Engineering Assistant – Testing Division',
-    title: 'Engineering Assistant',
-    qualifications: [
-      'HND – Sri Lanka Telecom Training Centre',
-      'BEng (Hons) – Sri Lanka Institute of Information Technology (Reading)',
-    ],
-    memberships: [],
-    initials: 'SP',
-    section: 'Testing Division',
-    photo: '/team/shevon.jpg',
-  },
-
-  // DESIGN DIVISION
-
-  {
-    name: 'Sajana Gunasekara',
-    designation: 'Head of Department – Design Division',
-    title: 'Senior Electrical Engineer',
-    qualifications: [
-      'B.Sc.Eng(Hons) – University of Moratuwa, AMIE(SL)',
-    ],
-    memberships: [],
-    initials: 'SG',
-    section: 'Design Division',
-    photo: '/team/sajana.jpg',
-  },
-
-    {
-    name: 'Kasun Jayasinghe',
-    designation: 'Electrical Engineer – Design Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc.Eng(Hons) - University of Peradeniya, AMIE(SL)',
-    ],
-    memberships: [],
-    initials: 'KJ',
-    section: 'Design Division',
-    photo: '/team/kasun.jpg',
-  },
-
-     {
-    name: 'Hansi Perera',
-    designation: 'Electrical Engineer – Design Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc.Eng(Hons) – General Sir John Kotelawala Defence University (KDU)',
-    ],
-    memberships: [],
-    initials: 'HP',
-    section: 'Design Division',
-    photo: '/team/hansi.jpg',
-  },
-     {
-    name: 'Danuka Lakshan',
-    designation: 'Electrical Engineer – Design Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc.Eng(Hons) – University of Ruhuna',
-    ],
-    memberships: [],
-    initials: 'DL',
-    section: 'Design Division',
-    photo: '/team/danuka.jpg',
-  },
-     {
-    name: 'Navindi Kulasena',
-    designation: 'Electrical Engineer – Design Division',
-    title: 'Electrical Engineer',
-    qualifications: [
-      'B.Sc.Eng(Hons) – University of Ruhuna',
-    ],
-    memberships: [],
-    initials: 'NK',
-    section: 'Design Division',
-    photo: '/team/navindi.jpg',
-  },
-  // ADMINISTRATION DIVISION
-  // Add administration staff here using section: 'Administration Division'
-      {
-    name: 'Isuri Shavindya',
-    designation: 'Administration Executive – Testing Division',
-    title: 'Adminstration Executive',
-    qualifications: [
-      'B.BST(Hons) in Food, Fisheries, Agricultural Technology, Diploma in Quality Management - Sri Lanka Standard Institution',
-    ],
-    memberships: [],
-    initials: 'IS',
-    section: 'Administration Division',
-    photo: '/team/isuri.jpg',
-  },
-
-      {
-    name: 'Chalani Gunawardana',
-    designation: 'Administration Executive – Design Division',
-    title: 'Adminstration Executive',
-    qualifications: [
-      'HD in Computing & Software Engineering, DBM, MBA(Reading)',
-    ],
-    memberships: [],
-    initials: 'CG',
-    section: 'Administration Division',
-    photo: '/team/chalani.jpg',
-  },
-
-  // ACCOUNTS DIVISION
-  // Add accounts staff here using section: 'Accounts Division'
-     {
-    name: 'Ruchini Vitharana',
-    designation: 'Accounts Executive',
-    title: 'Accounts Executive',
-    qualifications: [
-      'MAAT, HNDA(Business Finance), CA - Business level, BB.Mgt(Reading)',
-    ],
-    memberships: [],
-    initials: 'RV',
-    section: 'Accounts Division',
-    photo: '/team/ruchini.jpg',
-  },
-{
-    name: 'Senura Nethum',
-    designation: 'Accounts Assistant',
-    title: 'Accounts Assistant',
-    qualifications: [
-      'AAT (Level 2), Level 3 (Reading)',
-    ],
-    memberships: [],
-    initials: 'RV',
-    section: 'Accounts Division',
-    photo: '/team/senura.png',
-  }
-
-]
-
-const sections = [
-  {
-    title: 'Founder',
-    description: 'The founder behind APCL’s vision and development.',
-    icon: Award,
-  },
-  {
-    title: 'Director',
-    description: 'Leadership, strategic direction and corporate governance.',
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: 'CEO',
-    description: 'Executive leadership and overall company management.',
-    icon: Users,
-  },
-  {
-    title: 'Testing Division',
-    description:
-      'Electrical testing, commissioning, inspections and condition assessments.',
-    icon: GraduationCap,
-  },
-  {
-    title: 'Design Division',
-    description:
-      'Electrical engineering design, consultancy and technical solutions.',
-    icon: BriefcaseBusiness,
-  },
-  {
-    title: 'Administration Division',
-    description:
-      'Administrative coordination and operational support.',
-    icon: Users,
-  },
-  {
-    title: 'Accounts Division',
-    description:
-      'Financial administration, accounting and related services.',
-    icon: BriefcaseBusiness,
-  },
-]
-
-function MemberCard({ member }) {
-  const [imageFailed, setImageFailed] = useState(false)
-
-  const initials =
-    member.initials ||
-    member.name
-      .split(' ')
-      .filter(Boolean)
-      .map((part) => part[0])
-      .slice(0, 2)
-      .join('')
-      .toUpperCase()
-
+function getLinkedIn(person) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl">
-      <div className="h-1.5 bg-[#123b64] transition-colors group-hover:bg-amber-400" />
-
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start gap-4">
-          <div className="h-28 w-28 shrink-0 overflow-hidden rounded-xl bg-[#eaf1f8] text-xl font-black text-[#123b64] transition group-hover:bg-amber-100 sm:h-32 sm:w-32">
-            {member.photo && !imageFailed ? (
-              <img
-                src={member.photo}
-                alt={`Photo of ${member.name}`}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                onError={() => setImageFailed(true)}
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center">
-                {initials}
-              </div>
-            )}
-          </div>
-
-          <div className="min-w-0">
-            <span className="inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider text-amber-800">
-              {member.section}
-            </span>
-
-            <h3 className="mt-2 text-lg font-extrabold leading-snug text-[#123b64]">
-              {member.name}
-            </h3>
-
-            <p className="mt-1 text-sm font-semibold leading-6 text-slate-600">
-              {member.designation}
-            </p>
-          </div>
-        </div>
-
-        {member.qualifications?.length > 0 && (
-          <div className="mt-6 border-t border-slate-100 pt-5">
-            <div className="flex items-center gap-2 text-sm font-extrabold text-[#123b64]">
-              <GraduationCap
-                size={18}
-                className="shrink-0 text-amber-600"
-              />
-              Qualifications
-            </div>
-
-            <ul className="mt-3 space-y-2.5">
-              {member.qualifications.map((qualification) => (
-                <li
-                  key={qualification}
-                  className="flex items-start gap-2 text-sm leading-6 text-slate-600"
-                >
-                  <ChevronRight
-                    size={16}
-                    className="mt-1 shrink-0 text-amber-600"
-                  />
-                  <span>{qualification}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {member.memberships?.length > 0 && (
-          <div className="mt-5 border-t border-slate-100 pt-4">
-            <div className="flex items-center gap-2 text-sm font-extrabold text-[#123b64]">
-              <Award size={17} className="shrink-0 text-amber-600" />
-              Professional Credentials
-            </div>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {member.memberships.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold leading-5 text-slate-600"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div className="mt-auto pt-6">
-          <div className="flex items-center gap-2 border-t border-slate-100 pt-4 text-xs font-bold text-slate-400">
-            <BriefcaseBusiness size={15} />
-            {member.title}
-          </div>
-        </div>
-      </div>
-    </article>
-  )
+    person.linkedin ||
+    person.linkedinUrl ||
+    person.linkedinURL ||
+    person.linkedIn ||
+    ""
+  );
 }
 
-export default function TestingTeam() {
-  const [search, setSearch] = useState('')
+function initials(name = "") {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.replace(/[.,]/g, "")[0])
+    .join("")
+    .toUpperCase();
+}
 
-  const query = search.trim().toLowerCase()
+function PersonCard({ person, featured = false }) {
+  const linkedin = getLinkedIn(person);
 
-  const filteredMembers = teamMembers.filter((member) =>
-    [
-      member.name,
-      member.designation,
-      member.title,
-      member.section,
-      ...(member.qualifications || []),
-      ...(member.memberships || []),
-    ]
-      .join(' ')
-      .toLowerCase()
-      .includes(query),
-  )
+  return (
+    <article
+      className={`group overflow-hidden rounded-xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[0_14px_36px_rgba(12,39,67,0.10)] ${
+        featured
+          ? "grid grid-cols-1 sm:grid-cols-[minmax(190px,0.82fr)_1.18fr]"
+          : "flex flex-col"
+      }`}
+    >
+      {/* Profile image */}
+      <div
+        className={`relative overflow-hidden bg-[#e9eef4] ${
+          featured ? "h-64 sm:h-full sm:min-h-[290px]" : "h-60"
+        }`}
+      >
+        {person.image ? (
+          <img
+            src={person.image}
+            alt={person.name}
+            loading="lazy"
+            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.035]"
+          />
+        ) : (
+          <div className="flex h-full min-h-60 items-center justify-center bg-gradient-to-br from-[#edf2f7] to-[#dce5ee]">
+            <div
+              className={`flex items-center justify-center rounded-full border-4 border-white bg-[#123b64] font-bold text-white shadow-sm ${
+                featured ? "h-28 w-28 text-3xl" : "h-24 w-24 text-2xl"
+              }`}
+            >
+              {initials(person.name)}
+            </div>
+          </div>
+        )}
+      </div>
 
-  const getSectionMembers = (sectionTitle) =>
-    filteredMembers.filter((member) => member.section === sectionTitle)
+      {/* Profile details */}
+      <div
+        className={`flex flex-1 flex-col ${
+          featured ? "justify-center p-6 sm:p-7" : "p-5"
+        }`}
+      >
+        {/* Name */}
+        <h3
+          className={`font-bold leading-snug text-[#123b64] ${
+            featured ? "text-xl sm:text-2xl" : "text-lg"
+          }`}
+        >
+          {person.name}
+        </h3>
+
+        {/* Position — displayed only once */}
+        {person.position && (
+          <p className="mt-1.5 text-sm font-semibold leading-5 text-slate-700">
+            {person.position}
+          </p>
+        )}
+
+        {/* Optional area */}
+        {person.area && (
+          <p className="mt-1 text-xs leading-5 text-slate-500">
+            {person.area}
+          </p>
+        )}
+
+        {/* Qualifications */}
+        {person.qualifications && (
+          <div className="mt-3 border-t border-slate-100 pt-3">
+            <p className="text-[10px] font-bold uppercase tracking-[0.13em] text-slate-400">
+              Qualifications
+            </p>
+
+            <p className="mt-1.5 whitespace-pre-line text-xs leading-5 text-slate-600">
+              {person.qualifications}
+            </p>
+          </div>
+        )}
+
+        {/* LinkedIn */}
+        {linkedin && (
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${person.name}'s LinkedIn profile`}
+            title="View LinkedIn profile"
+            className="mt-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-[#0A66C2] transition-all duration-200 hover:border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white"
+          >
+            <Linkedin size={17} />
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function TeamGroup({
+  title,
+  description,
+  people,
+  emptyMessage,
+  featured = false,
+}) {
+  return (
+    <section className="mt-14">
+      {/* Section heading */}
+      <div className="mb-6 flex flex-col gap-2 border-b border-slate-200 pb-5 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.17em] text-slate-500">
+            APCL · People
+          </p>
+
+          <h2 className="text-2xl font-bold tracking-tight text-[#123b64] md:text-3xl">
+            {title}
+          </h2>
+
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+            {description}
+          </p>
+        </div>
+
+        {people.length > 0 && (
+          <p className="text-xs font-medium text-slate-400">
+            {people.length} {people.length === 1 ? "profile" : "profiles"}
+          </p>
+        )}
+      </div>
+
+      {/* Profiles */}
+      {people.length > 0 ? (
+        <div
+          className={`grid gap-5 ${
+            featured
+              ? "lg:grid-cols-2"
+              : "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          }`}
+        >
+          {people.map((person, index) => (
+            <PersonCard
+              key={`${person.name || "member"}-${index}`}
+              person={person}
+              featured={featured}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="rounded-lg border border-dashed border-slate-300 bg-slate-50 px-5 py-6 text-sm text-slate-500">
+          {emptyMessage}
+        </p>
+      )}
+    </section>
+  );
+}
+
+export default function Team() {
+  const grouped = useMemo(() => {
+    const groups = {
+      founder: [],
+      directors: [],
+      ceo: [],
+      design: [],
+      testing: [],
+      admin: [],
+      other: [],
+    };
+
+    team.forEach((person) => {
+      // Role is used for categorization.
+      // Position is used only as the displayed designation.
+      const role = getRole(person);
+
+      if (includesAny(role, ["founder", "founding director"])) {
+        groups.founder.push(person);
+      } else if (includesAny(role, ["director", "directors"])) {
+        groups.directors.push(person);
+      } else if (
+        includesAny(role, [
+          "ceo",
+          "chief executive officer",
+          "senior consultant",
+        ])
+      ) {
+        groups.ceo.push(person);
+      } else if (
+        includesAny(role, ["design", "design division", "design engineer"])
+      ) {
+        groups.design.push(person);
+      } else if (
+        includesAny(role, [
+          "testing",
+          "testing division",
+          "commissioning",
+        ])
+      ) {
+        groups.testing.push(person);
+      } else if (
+        includesAny(role, [
+          "administrative",
+          "administration",
+          "admin",
+          "office support",
+        ])
+      ) {
+        groups.admin.push(person);
+      } else {
+        groups.other.push(person);
+      }
+    });
+
+    return groups;
+  }, []);
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative isolate overflow-hidden bg-[#123b64]">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#081c32] via-[#123b64] to-[#1b527f]" />
+      <PageHero
+        eyebrow="Our People"
+        title="Leadership & Engineering Expertise"
+        subtitle="A team of experienced consultants, engineers and professionals delivering reliable, standards-based electrical engineering solutions."
+      />
 
-        <div className="mx-auto max-w-7xl px-5 py-20 md:px-6 md:py-28">
-          <div className="max-w-3xl">
-            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[.14em] text-amber-200">
-              <span className="h-2 w-2 rounded-full bg-amber-400" />
-              Our People · Amithi Power Consultants
-            </p>
-
-            <h1 className="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              The people behind
-              <span className="block text-amber-300">
-                our engineering excellence.
-              </span>
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-200 md:text-lg">
-              Meet the people at Amithi Power Consultants (Pvt) Ltd.
-              From company leadership to our engineering, administration
-              and accounts teams, our people work together to deliver
-              professional electrical engineering services.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="#team-members"
-                className="inline-flex items-center gap-3 rounded-lg bg-amber-400 px-6 py-4 font-extrabold text-[#123b64] transition hover:bg-amber-300"
-              >
-                Meet Our Team
-                <ArrowRight size={18} />
-              </a>
-
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-3 rounded-lg border border-white/40 px-6 py-4 font-bold text-white transition hover:bg-white/10"
-              >
-                Contact Our Team
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Introduction */}
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:grid-cols-3 md:px-6">
-          <div className="flex items-start gap-4">
-            <div className="rounded-xl bg-amber-50 p-3 text-amber-700">
-              <Users size={25} />
-            </div>
-            <div>
-              <h2 className="font-extrabold text-[#123b64]">
-                Experienced Leadership
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-500">
-                Leadership and strategic direction across the company.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="rounded-xl bg-amber-50 p-3 text-amber-700">
-              <GraduationCap size={25} />
-            </div>
-            <div>
-              <h2 className="font-extrabold text-[#123b64]">
-                Qualified Professionals
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-500">
-                Engineering expertise, academic qualifications and
-                technical development.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="rounded-xl bg-amber-50 p-3 text-amber-700">
-              <Award size={25} />
-            </div>
-            <div>
-              <h2 className="font-extrabold text-[#123b64]">
-                One Team
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-500">
-                Different divisions working together to support our clients.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* All divisions on the same page */}
-      <section
-        id="team-members"
-        className="bg-slate-50 py-16 md:py-24"
-      >
-        <div className="mx-auto max-w-7xl px-5 md:px-6">
-          <SectionHeading
-            eyebrow="Our People"
-            title="Meet our team."
-            text="Explore our leadership and the people across each division at APCL."
+      <main className="bg-white pb-20">
+        <div className="mx-auto max-w-7xl px-5 pt-10 md:px-6 md:pt-14">
+          <TeamGroup
+            title="Founder"
+            description="The foundation of APCL’s engineering vision and professional values."
+            people={grouped.founder}
+            featured
+            emptyMessage="Founder profile will be added here."
           />
 
-          {/* Search */}
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="relative w-full sm:max-w-md">
-              <Search
-                size={19}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-              />
-              <input
-                type="search"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search name, qualification or division..."
-                aria-label="Search team members"
-                className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-12 pr-4 text-sm outline-none transition focus:border-amber-400 focus:ring-2 focus:ring-amber-100"
-              />
-            </div>
+          <TeamGroup
+            title="Directors"
+            description="Providing governance, strategic direction and professional oversight."
+            people={grouped.directors}
+            featured
+            emptyMessage="Director profiles will be added here."
+          />
 
-            <p className="text-sm font-semibold text-slate-500">
-              Showing {filteredMembers.length} of {teamMembers.length} team members
-            </p>
-          </div>
+          <TeamGroup
+            title="Chief Executive Officer / Senior Consultant"
+            description="Leading the organization and guiding the delivery of APCL’s consultancy and engineering services."
+            people={grouped.ceo}
+            featured
+            emptyMessage="CEO profile will be added here."
+          />
 
-          {/* Sections in the requested order */}
-          <div className="mt-12 space-y-16">
-            {sections.map((section) => {
-              const members = getSectionMembers(section.title)
-              const SectionIcon = section.icon
+          <TeamGroup
+            title="Design Division"
+            description="Engineering design and consultancy for power systems, MEP and related electrical infrastructure."
+            people={grouped.design}
+            emptyMessage="Design Division team profiles will appear here when their division or role is identified in the team data."
+          />
 
-              // Keep the section visible while searching if it has matches.
-              // Empty sections remain visible when the search is blank.
-              if (query && members.length === 0) return null
+          <TeamGroup
+            title="Testing Division"
+            description="Inspection, testing and commissioning professionals supporting electrical system safety, performance and reliability."
+            people={grouped.testing}
+            emptyMessage="Testing Division team profiles will appear here when their division or role is identified in the team data."
+          />
 
-              return (
-                <section
-                  key={section.title}
-                  aria-labelledby={`section-${section.title
-                    .toLowerCase()
-                    .replaceAll(' ', '-')}`}
-                  className="scroll-mt-8"
-                >
-                  <div className="mb-6 flex items-start gap-4 border-b border-slate-200 pb-5">
-                    <div className="rounded-xl bg-amber-50 p-3 text-amber-700">
-                      <SectionIcon size={25} />
-                    </div>
+          <TeamGroup
+            title="Administrative Staff"
+            description="Supporting project coordination, business operations and the smooth delivery of APCL services."
+            people={grouped.admin}
+            emptyMessage="Administrative staff profiles will appear here when their roles are identified in the team data."
+          />
 
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <h2
-                          id={`section-${section.title
-                            .toLowerCase()
-                            .replaceAll(' ', '-')}`}
-                          className="text-2xl font-black text-[#123b64] sm:text-3xl"
-                        >
-                          {section.title}
-                        </h2>
-
-                        <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-500 ring-1 ring-slate-200">
-                          {members.length}{' '}
-                          {members.length === 1 ? 'Member' : 'Members'}
-                        </span>
-                      </div>
-
-                      <p className="mt-2 text-sm leading-6 text-slate-500">
-                        {section.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {members.length > 0 ? (
-                    <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                      {members.map((member) => (
-                        <MemberCard
-                          key={member.name}
-                          member={member}
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="rounded-xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center">
-                      <Users
-                        size={28}
-                        className="mx-auto text-slate-300"
-                      />
-                      <p className="mt-3 text-sm font-semibold text-slate-500">
-                        Team details will be added to this section.
-                      </p>
-                    </div>
-                  )}
-                </section>
-              )
-            })}
-
-            {query && filteredMembers.length === 0 && (
-              <div className="rounded-2xl border border-slate-200 bg-white px-6 py-16 text-center">
-                <Users size={34} className="mx-auto text-slate-300" />
-                <h3 className="mt-4 text-lg font-extrabold text-[#123b64]">
-                  No team members found
-                </h3>
-                <p className="mt-2 text-sm text-slate-500">
-                  Try another name, qualification or division.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setSearch('')}
-                  className="mt-5 font-bold text-amber-700 hover:text-[#123b64]"
-                >
-                  Clear search
-                </button>
-              </div>
-            )}
-          </div>
+          {grouped.other.length > 0 && (
+            <TeamGroup
+              title="Engineering & Technical Team"
+              description="Additional technical professionals contributing to APCL’s project delivery."
+              people={grouped.other}
+              emptyMessage="Additional team profiles will be listed here."
+            />
+          )}
         </div>
-      </section>
-
-      {/* Call to action */}
-      <section className="bg-amber-400">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 px-5 py-10 md:flex-row md:items-center md:px-6">
-          <div>
-            <h2 className="text-2xl font-black text-[#123b64]">
-              Need professional electrical services?
-            </h2>
-            <p className="mt-2 text-sm text-[#123b64]/80">
-              Discuss your engineering design, inspection, testing or
-              commissioning requirements with APCL.
-            </p>
-          </div>
-
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center gap-3 rounded-lg bg-[#123b64] px-6 py-4 font-extrabold text-white transition hover:bg-slate-800"
-          >
-            Contact Our Team
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </section>
+      </main>
     </>
-  )
+  );
 }
