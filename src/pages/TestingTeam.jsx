@@ -267,7 +267,7 @@ export default function Team() {
           />
 
           <TeamGroup
-            title="Directors"
+            title="Board of Directors"
             description="Providing governance, strategic direction and professional oversight."
             people={grouped.directors}
             featured
@@ -305,7 +305,7 @@ export default function Team() {
 
           {grouped.other.length > 0 && (
             <TeamGroup
-              title="Engineering & Technical Team"
+              title="Account & Finance Department"
               description="Additional technical professionals contributing to APCL’s project delivery."
               people={grouped.other}
               emptyMessage="Additional team profiles will be listed here."

@@ -162,7 +162,7 @@ export const team = [
   // linkedin: "https://www.linkedin.com/in/engineer-profile/"
   // },
   {
-  name: "D.G. Rienzie Fernando",
+  name: "Late D.G. Rienzie Fernando",
   role: "Founder",
   position: "Founder / Former Managing Director / Senior Consultant",
   image: "/team/rienzie.jpeg",
