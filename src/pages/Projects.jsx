@@ -84,8 +84,8 @@ export default function Projects() {
             ))}
           </div>
           <p className="mt-8 text-xs leading-6 text-slate-500">
-            Confirm client permissions, project status and image usage rights
-            before public release.
+            {/* Confirm client permissions, project status and image usage rights */}
+            {/* before public release. */}
           </p>
         </div>
       </section>
