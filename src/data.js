@@ -375,7 +375,7 @@ Diploma in Quality Management, Sri Lanka Standards Institution`,
     name: "Chalani Gunawardana",
     role: "admin",
     position: "Administration Executive - Design Division",
-    image: "/team/chalani.jpg",
+    image: "/team/chalani.png",
     qualifications: `Higher Diploma in Computing & Software Engineering;
 DBM;
 MBA (Reading)`,

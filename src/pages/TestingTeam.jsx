@@ -47,7 +47,9 @@ function PersonCard({ person, featured = false }) {
       {/* Profile image */}
       <div
         className={`relative overflow-hidden bg-[#e9eef4] ${
-          featured ? "h-64 sm:h-full sm:min-h-[290px]" : "h-60"
+          featured
+            ? "h-72 sm:h-full sm:min-h-[320px]"
+            : "h-72 sm:h-80"
         }`}
       >
         {person.image ? (
@@ -55,7 +57,7 @@ function PersonCard({ person, featured = false }) {
             src={person.image}
             alt={person.name}
             loading="lazy"
-            className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.035]"
+            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.035]"
           />
         ) : (
           <div className="flex h-full min-h-60 items-center justify-center bg-gradient-to-br from-[#edf2f7] to-[#dce5ee]">
@@ -85,7 +87,7 @@ function PersonCard({ person, featured = false }) {
           {person.name}
         </h3>
 
-        {/* Position — displayed only once */}
+        {/* Position - displayed only once */}
         {person.position && (
           <p className="mt-1.5 text-sm font-semibold leading-5 text-slate-700">
             {person.position}
