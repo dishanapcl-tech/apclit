@@ -15,15 +15,15 @@ import { SectionHeading } from '../components/Layout'
 const teamMembers = [
   // FOUNDER
    {
-    name: 'Rienzie Fernando',
+    name: 'D.G. Rienzie Fernando',
     designation: 'Founder of APCL',
-    title: 'Senior Electrical Engineer',
+    title: 'Chartered  Electrical Engineer - Consultant',
     qualifications: [
-      'B.Eng (EEE) – JNTUA, India',
-      'MSc (Electrical Installations) – University of Moratuwa',
+      'Senior Consultant, Charted Electrical Engineer',
+      'B.Sc Eng (Hons), MIE(SL), MECSL',
     ],
-    memberships: ['AMIE(SL)'],
-    initials: 'CS',
+    memberships: ['MIE(SL)'],
+    initials: 'RF',
     section: 'Founder',
     photo: '/team/rienzie.jpeg',
   },
@@ -31,13 +31,8 @@ const teamMembers = [
   // DIRECTOR
    {
     name: 'Dinithi Fernando',
-    designation: 'Head of Department – Testing & Commissioning',
-    title: 'Senior Electrical Engineer',
-    qualifications: [
-      'B.Eng (EEE) – JNTUA, India',
-      'MSc (Electrical Installations) – University of Moratuwa',
-    ],
-    memberships: ['AMIE(SL)'],
+    designation: 'Managing Director - APCL',
+    title: 'Managing Director',
     initials: 'CS',
     section: 'Director',
     photo: '/team/dinithi.jpg',
@@ -46,11 +41,10 @@ const teamMembers = [
   // CEO
  {
     name: 'Kaushalya Alpitiarachchi',
-    designation: 'Head of Department – Testing & Commissioning',
-    title: 'Senior Electrical Engineer',
+    designation: 'Chief Executive Officer',
+    title: 'Chartered Engineer',
     qualifications: [
-      'B.Eng (EEE) – JNTUA, India',
-      'MSc (Electrical Installations) – University of Moratuwa',
+      'Senior Consultant, Charted Electrical Engineer, Registered Building Services Engineer, Certified Thermographic Surveyor,B.Sc.Eng (Hons) – UoP, PG. Dip (Electrical Installations) – UoM, C.Eng, MIESL, MPMI, MGBCSL',
     ],
     memberships: ['AMIE(SL)'],
     initials: 'CS',
@@ -216,9 +210,9 @@ const teamMembers = [
   {
     name: 'Sajana Gunasekara',
     designation: 'Head of Department – Design Division',
-    title: 'Electrical Engineer',
+    title: 'Senior Electrical Engineer',
     qualifications: [
-      'B.Sc. Engineering (Hons) – University of Moratuwa',
+      'B.Sc.Eng(Hons) – University of Moratuwa, AMIE(SL)',
     ],
     memberships: [],
     initials: 'SG',
@@ -226,11 +220,110 @@ const teamMembers = [
     photo: '/team/sajana.jpg',
   },
 
+    {
+    name: 'Kasun Jayasinghe',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) - University of Peradeniya, AMIE(SL)',
+    ],
+    memberships: [],
+    initials: 'KJ',
+    section: 'Design Division',
+    photo: '/team/kasun.jpg',
+  },
+
+     {
+    name: 'Hansi Perera',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) – General Sir John Kotelawala Defence University (KDU)',
+    ],
+    memberships: [],
+    initials: 'HP',
+    section: 'Design Division',
+    photo: '/team/hansi.jpg',
+  },
+     {
+    name: 'Danuka Lakshan',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) – University of Ruhuna',
+    ],
+    memberships: [],
+    initials: 'DL',
+    section: 'Design Division',
+    photo: '/team/danuka.jpg',
+  },
+     {
+    name: 'Navindi Kulasena',
+    designation: 'Electrical Engineer – Design Division',
+    title: 'Electrical Engineer',
+    qualifications: [
+      'B.Sc.Eng(Hons) – University of Ruhuna',
+    ],
+    memberships: [],
+    initials: 'NK',
+    section: 'Design Division',
+    photo: '/team/navindi.jpg',
+  },
   // ADMINISTRATION DIVISION
   // Add administration staff here using section: 'Administration Division'
+      {
+    name: 'Isuri Shavindya',
+    designation: 'Administration Executive – Testing Division',
+    title: 'Adminstration Executive',
+    qualifications: [
+      'B.BST(Hons) in Food, Fisheries, Agricultural Technology, Diploma in Quality Management - Sri Lanka Standard Institution',
+    ],
+    memberships: [],
+    initials: 'IS',
+    section: 'Administration Division',
+    photo: '/team/isuri.jpg',
+  },
+
+      {
+    name: 'Chalani Gunawardana',
+    designation: 'Administration Executive – Design Division',
+    title: 'Adminstration Executive',
+    qualifications: [
+      'HD in Computing & Software Engineering, DBM, MBA(Reading)',
+    ],
+    memberships: [],
+    initials: 'CG',
+    section: 'Administration Division',
+    photo: '/team/chalani.jpg',
+  },
 
   // ACCOUNTS DIVISION
   // Add accounts staff here using section: 'Accounts Division'
+     {
+    name: 'Ruchini Vitharana',
+    designation: 'Accounts Executive',
+    title: 'Accounts Executive',
+    qualifications: [
+      'MAAT, HNDA(Business Finance), CA - Business level, BB.Mgt(Reading)',
+    ],
+    memberships: [],
+    initials: 'RV',
+    section: 'Accounts Division',
+    photo: '/team/ruchini.jpg',
+  },
+{
+    name: 'Senura Nethum',
+    designation: 'Accounts Assistant',
+    title: 'Accounts Assistant',
+    qualifications: [
+      'AAT (Level 2), Level 3 (Reading)',
+    ],
+    memberships: [],
+    initials: 'RV',
+    section: 'Accounts Division',
+    photo: '/team/senura.png',
+  }
+
 ]
 
 const sections = [

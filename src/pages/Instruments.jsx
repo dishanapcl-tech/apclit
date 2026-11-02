@@ -36,11 +36,7 @@ export default function Instruments() {
               </div>
             ))}
           </div>
-          <p className="mt-6 flex items-start gap-2 text-xs leading-6 text-slate-500">
-            <CheckCircle2 size={16} className="mt-1 shrink-0 text-amber-700" />{" "}
-            Confirm current inventory, calibration validity and available ranges
-            before publishing.
-          </p>
+
         </div>
       </section>
     </>

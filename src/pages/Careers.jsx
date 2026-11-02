@@ -594,6 +594,7 @@ function TrainingBannerSlideshow() {
   const photos = [
     "/images/training.jpeg",
     "/images/training-2.jpeg",
+    "/images/training-3.jpeg",
    
   ];
 
