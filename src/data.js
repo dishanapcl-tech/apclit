@@ -168,7 +168,7 @@ export const team = [
   image: "/team/rienzie.jpeg",
     qualifications: `Senior Consultant, Chartered Electrical Engineer
 B.Sc. Eng. (Hons), MIE(SL), MECSL`,
-  linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  // linkedin: "https://www.linkedin.com/in/engineer-profile/"
   },
   {
   name: "Dinithi Fernando",
