@@ -173,6 +173,7 @@ B.Sc. Eng. (Hons), MIE(SL), MECSL`,
   {
   name: "Dinithi Fernando",
   role: "Managing Director",
+  position: "Managing Director",
   image: "/team/Dinithi.jpeg",
   qualifications: `MBA - University of Kelaniya, BBM - University of Mangalore
 CIMA (Operational Level)[Reading]`,
@@ -184,7 +185,7 @@ CIMA (Operational Level)[Reading]`,
   position: "Director",
   image: "/team/Anusha .jpeg",
     qualifications: ``,
-  linkedin: "https://www.linkedin.com/in/engineer-profile/"
+  // linkedin: "https://www.linkedin.com/in/engineer-profile/"
   },
     {
   name: "Kaushalya Alpitiarachchi",
@@ -378,8 +379,7 @@ Diploma in Quality Management, Sri Lanka Standards Institution`,
     position: "Administration Executive - Design Division",
     image: "/team/chalani.png",
     qualifications: `Higher Diploma in Computing & Software Engineering;
-DBM;
-MBA (Reading)`,
+DBM; MBA (Reading)`,
     linkedin: "",
   },
 
@@ -389,9 +389,8 @@ MBA (Reading)`,
     role: "accounts",
     position: "Accounts Executive",
     image: "/team/ruchini.jpg",
-    qualifications: `MAAT;
-HNDA (Business Finance);
-CA - Business Level;
+    qualifications: `MAAT,HNDA (Business Finance)
+CA - Business Level
 BB.Mgt (Reading)`,
     linkedin: "",
   },
