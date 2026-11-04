@@ -211,7 +211,7 @@ function HeroSlider() {
       <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#061a32]/95 via-[#082b4e]/80 to-[#082b4e]/25" />
       <div className="absolute inset-0 -z-20 bg-gradient-to-t from-[#061a32]/90 via-transparent to-[#061a32]/20" />
 
-      <div className="mx-auto w-full max-w-[1440px] px-5 pb-00 pt-10 sm:px-8 md:pb-28 lg:px-14">
+      <div className="mx-auto w-full max-w-[1440px] px-5 py-15 sm:px-8 lg:px-14">
         <div key={active} className="max-w-4xl">
           <div className="apcl-fade-up mb-6 flex items-center gap-3">
             <span className="h-px w-11 bg-sky-300" />
