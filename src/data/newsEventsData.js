@@ -8,7 +8,7 @@ export const newsItems = [
     category: "Project Completion",
     date: "13.11.2026",
     title: "Project Completion – LV Thermography Survey for Multinational Corporation",
-    summary: "Successful completion of a comprehensive LV thermography survey for electrical power infrastructure at Multinational Corporation. This project involved meticulous inspection and analysis, ensuring optimal performance and safety standards.",
+    summary: "Successful completion of a comprehensive LV thermography survey for electrical at Multinational Corporation. This project involved inspection and analysis, ensuring safety standards.",
     image: "/images/News/Thermo_2.png",
     fallbackImage: "https://images.unsplash.com/photo-1473341304170-971b4b8c5c4a?auto=format&fit=crop&w=900&q=80",
     imageAlt: "Electrical power infrastructure",
