@@ -79,7 +79,7 @@ export default function CPDEventsSection({
       <div className="mx-auto h-full min-w-0 max-w-[1440px] px-5 sm:px-8 lg:px-10 2xl:px-12">
 
         {/* SECTION HEADER */}
-        <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-2">
 
           <h2
             id="apcl-events-heading"
