@@ -16,8 +16,14 @@ import {
   Leaf,
   ChevronLeft,
   ChevronRight,
+  CalendarDays,
+  MapPin,
+  Megaphone,
+  Newspaper,
 } from "lucide-react";
 import { projects } from "../data";
+import NewsSection from "../components/NewsSection";
+import CPDEventsSection from "../components/CPDEventsSection";
 
 /*
  * APCL homepage — blue corporate theme
@@ -162,7 +168,7 @@ function HeroSlider() {
   const slide = heroSlides[active];
 
   return (
-    <section className="apcl-hero relative isolate flex min-h-[680px] items-start overflow-hidden bg-[#092d50] text-white md:min-h-[300px]">
+    <section className="apcl-hero relative isolate flex min-h-[300px] items-start overflow-hidden bg-[#092d50] text-white md:min-h-[300px]">
       <style>{`
         @keyframes apclFadeUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -211,7 +217,7 @@ function HeroSlider() {
       <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#061a32]/95 via-[#082b4e]/80 to-[#082b4e]/25" />
       <div className="absolute inset-0 -z-20 bg-gradient-to-t from-[#061a32]/90 via-transparent to-[#061a32]/20" />
 
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-15 sm:px-8 lg:px-14">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pb-12 pt-10 sm:px-8 md:pb-12 lg:px-14">
         <div key={active} className="max-w-4xl">
           <div className="apcl-fade-up mb-6 flex items-center gap-3">
             <span className="h-px w-11 bg-sky-300" />
@@ -248,6 +254,7 @@ function HeroSlider() {
             </Link>
           </div>
         </div>
+
         <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/15">
           <div key={active} className="apcl-progress h-full bg-sky-300" />
         </div>
@@ -285,7 +292,13 @@ export default function Home() {
     <>
       <HeroSlider />
 
-      <section className="border-b border-blue-100 bg-white">
+      {/* Frequently updated content is maintained in independent components/data. */}
+      <div className="grid min-w-0 grid-cols-1 items-stretch gap-0 lg:grid-cols-2">
+        <NewsSection title="News" />
+        <CPDEventsSection title="APCL Academy" />
+      </div>
+
+      {/* <section className="border-b border-blue-100 bg-white">
         <div className="mx-auto grid max-w-[1440px] gap-0 px-5 sm:grid-cols-3 sm:px-8 lg:px-14">
           {[
             {
@@ -300,7 +313,7 @@ export default function Home() {
             },
             {
               Icon: ShieldCheck,
-              title: "Quality & afety",
+              title: "Quality & Safety",
               text: "Understand risk and asset condition.",
             },
           ].map(({ Icon, title, text }, index) => (
@@ -319,8 +332,8 @@ export default function Home() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
+        </div>s
+      </section> */}
 
       {/* ABOUT APCL — closely matching the supplied About Us reference */}
       <section className="bg-white">
