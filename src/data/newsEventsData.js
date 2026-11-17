@@ -14,6 +14,18 @@ export const newsItems = [
     imageAlt: "Electrical power infrastructure",
     href: "/news",
   },
+  {
+    id: "MV_T&C_1",
+    featured: true,
+    category: "Project Completion",
+    date: "02.11.2026",
+    title: "Project Completion – Medium Voltage Testing & Commissioning for University",
+    summary: "Successful completion of a comprehensive MV testing and commissioning project for a university. This project involved inspection and analysis, ensuring safety standards.",
+    image: "/images/News/MV_T&C_1.jpg",
+    fallbackImage: "https://images.unsplash.com/photo-1473341304170-971b4b8c5c4a?auto=format&fit=crop&w=900&q=80",
+    imageAlt: "Electrical power infrastructure",
+    href: "/news",
+  },
 ];
 
 export const cpdEvents = [

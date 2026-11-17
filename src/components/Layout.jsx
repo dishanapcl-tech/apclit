@@ -28,11 +28,12 @@ const NAVIGATION = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
   { label: "Our Team", path: "/testing-team" },
+  { label: "News", path: "/testing-team" },
   { label: "Projects", path: "/projects" },
-  { label: "Instruments", path: "/instruments" },
-  { label: "Clients", path: "/clients" },
+  // { label: "Instruments", path: "/instruments" },
+  // { label: "Clients", path: "/clients" },
   { label: "Careers", path: "/careers" },
-  { label: "Contact", path: "/contact" },
+  // { label: "Contact", path: "/contact" },
 ];
 
 const SERVICES = [
