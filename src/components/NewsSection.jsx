@@ -11,7 +11,7 @@ import {
 import { newsItems } from "../data/newsEventsData";
 
 // Carousel settings
-const AUTO_SLIDE_DURATION = 2000; // 3 seconds
+const AUTO_SLIDE_DURATION = 5000; // 3 seconds
 const SLIDE_ANIMATION_DURATION = 450; // 450 milliseconds
 
 export default function NewsSection({ title = "News" }) {
