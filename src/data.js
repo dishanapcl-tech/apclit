@@ -1,7 +1,7 @@
 export const COMPANY = {
   name: "Amithi Power Consultants (Pvt) Ltd",
   established: "2004",
-  email: "info@apcl.lk",
+  email: "sales@apcl.lk",
   phone: "+94 11 287 5278",
   address: "411/16-1/1, Atigala Mawatha, Rajagiriya, Sri Lanka",
 };
