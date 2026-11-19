@@ -28,7 +28,7 @@ const NAVIGATION = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
   { label: "Our Team", path: "/testing-team" },
-  { label: "News", path: "/testing-team" },
+  { label: "News", path: "/news" },
   { label: "Projects", path: "/projects" },
   // { label: "Instruments", path: "/instruments" },
   // { label: "Clients", path: "/clients" },

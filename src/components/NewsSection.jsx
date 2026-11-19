@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+
 import {
   ArrowRight,
   CalendarDays,
@@ -8,10 +9,14 @@ import {
   ChevronRight,
   ChevronLeft,
 } from "lucide-react";
+
 import { newsItems } from "../data/newsEventsData";
 
-// Carousel settings
-const AUTO_SLIDE_DURATION = 5000; // 3 seconds
+// =====================================================
+// CAROUSEL SETTINGS
+// =====================================================
+
+const AUTO_SLIDE_DURATION = 5000; // 5 seconds
 const SLIDE_ANIMATION_DURATION = 450; // 450 milliseconds
 
 export default function NewsSection({ title = "News" }) {
@@ -23,21 +28,38 @@ export default function NewsSection({ title = "News" }) {
 
   const totalNews = featuredNews.length;
 
-  // Next news
+  // =====================================================
+  // ARTICLE DETAIL LINK
+  // =====================================================
+
+  const getNewsLink = (item) => {
+    return item.slug ? `/news/${item.slug}` : "/news";
+  };
+
+  // =====================================================
+  // NEXT NEWS
+  // =====================================================
+
   const nextNews = useCallback(() => {
     if (totalNews <= 1) return;
 
     setCurrentIndex((prev) => (prev + 1) % totalNews);
   }, [totalNews]);
 
-  // Previous news
+  // =====================================================
+  // PREVIOUS NEWS
+  // =====================================================
+
   const previousNews = useCallback(() => {
     if (totalNews <= 1) return;
 
     setCurrentIndex((prev) => (prev - 1 + totalNews) % totalNews);
   }, [totalNews]);
 
-  // Automatic sliding every 5 seconds
+  // =====================================================
+  // AUTOMATIC SLIDING
+  // =====================================================
+
   useEffect(() => {
     if (totalNews <= 1 || isPaused) return;
 
@@ -48,7 +70,10 @@ export default function NewsSection({ title = "News" }) {
     return () => clearInterval(interval);
   }, [totalNews, isPaused]);
 
-  // Active news item
+  // =====================================================
+  // ACTIVE NEWS ITEM
+  // =====================================================
+
   const activeNews = featuredNews[currentIndex];
 
   return (
@@ -61,6 +86,7 @@ export default function NewsSection({ title = "News" }) {
       <div className="mx-auto h-full min-w-0 max-w-[1440px] px-5 sm:px-8 lg:px-10 2xl:px-12">
 
         {/* ================= SECTION HEADER ================= */}
+
         <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-2">
 
           <div className="min-w-0">
@@ -73,6 +99,7 @@ export default function NewsSection({ title = "News" }) {
           </div>
 
           {/* NAVIGATION ARROWS + VIEW ALL */}
+
           <div className="flex shrink-0 items-center gap-2">
 
             {totalNews > 1 && (
@@ -97,7 +124,7 @@ export default function NewsSection({ title = "News" }) {
               </>
             )}
 
-            {/* <Link
+            <Link
               to="/news"
               className="group inline-flex items-center gap-2 rounded-lg border border-[#D5E3EF] bg-white px-3 py-2.5 text-xs font-bold text-[#245B85] shadow-sm transition duration-200 hover:border-[#3B82B8] hover:bg-[#EAF3FA]"
             >
@@ -107,12 +134,13 @@ export default function NewsSection({ title = "News" }) {
                 size={14}
                 className="transition-transform group-hover:translate-x-1"
               />
-            </Link> */}
+            </Link>
 
           </div>
         </div>
 
         {/* ================= NEWS CAROUSEL ================= */}
+
         <div className="min-w-0">
 
           {activeNews ? (
@@ -121,12 +149,17 @@ export default function NewsSection({ title = "News" }) {
               className="animate-news-slide group flex min-w-0 flex-col gap-4 overflow-hidden rounded-xl border border-[#DCE6EF] bg-white p-3 shadow-[0_2px_8px_rgba(30,58,90,0.04)] transition-all duration-300 hover:border-[#B8D2E7] hover:shadow-lg sm:flex-row"
             >
 
-              {/* NEWS IMAGE */}
-              <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-lg bg-[#E5EEF6] sm:h-44 sm:w-44 lg:w-48">
+              {/* NEWS IMAGE - CLICKABLE */}
 
-                {activeNews.image ? (
+              <Link
+                to={getNewsLink(activeNews)}
+                aria-label={`Read ${activeNews.title}`}
+                className="relative block h-48 w-full shrink-0 overflow-hidden rounded-lg bg-[#E5EEF6] sm:h-44 sm:w-44 lg:w-48"
+              >
+
+                {activeNews.cardImage || activeNews.image ? (
                   <img
-                    src={activeNews.image}
+                    src={activeNews.cardImage || activeNews.image}
                     alt={activeNews.imageAlt || activeNews.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
@@ -146,12 +179,14 @@ export default function NewsSection({ title = "News" }) {
                   </div>
                 )}
 
-              </div>
+              </Link>
 
               {/* NEWS CONTENT */}
+
               <div className="flex min-w-0 flex-1 flex-col justify-center px-1 py-2 sm:px-2">
 
                 {/* CATEGORY AND DATE */}
+
                 <div className="mb-3 flex flex-wrap items-center gap-3">
 
                   <span className="inline-flex w-fit items-center rounded-md border border-[#D4E5F3] bg-[#EAF3FA] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#245B85]">
@@ -166,18 +201,26 @@ export default function NewsSection({ title = "News" }) {
                 </div>
 
                 {/* NEWS TITLE */}
+
                 <h3 className="break-words text-base font-bold leading-snug text-[#123B64] transition-colors group-hover:text-[#3B82B8] sm:text-lg">
-                  {activeNews.title}
+                  <Link
+                    to={getNewsLink(activeNews)}
+                    className="hover:text-[#3B82B8]"
+                  >
+                    {activeNews.title}
+                  </Link>
                 </h3>
 
                 {/* NEWS DESCRIPTION */}
+
                 <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-500">
                   {activeNews.summary}
                 </p>
 
-                {/* READ MORE */}
-                {/* <Link
-                  to={activeNews.href || "/news"}
+                {/* READ MORE - DIRECT ARTICLE LINK */}
+
+                <Link
+                  to={getNewsLink(activeNews)}
                   className="mt-4 inline-flex w-fit items-center gap-2 text-xs font-bold text-[#286B9D] transition-colors hover:text-[#123B64]"
                 >
                   Read More
@@ -186,7 +229,7 @@ export default function NewsSection({ title = "News" }) {
                     size={15}
                     className="transition-transform group-hover:translate-x-1"
                   />
-                </Link> */}
+                </Link>
 
               </div>
             </article>
@@ -194,6 +237,7 @@ export default function NewsSection({ title = "News" }) {
           ) : (
 
             /* EMPTY STATE */
+
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-[#C9D9E7] bg-white px-6 py-12 text-center">
 
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#EAF3FA] text-[#3B82B8]">
@@ -212,10 +256,12 @@ export default function NewsSection({ title = "News" }) {
           )}
 
           {/* ================= CAROUSEL INDICATORS ================= */}
+
           {totalNews > 1 && (
             <div className="mt-4 flex items-center justify-between">
 
               {/* INDICATOR DOTS */}
+
               <div className="flex items-center gap-1.5">
 
                 {featuredNews.map((item, index) => (
@@ -224,7 +270,9 @@ export default function NewsSection({ title = "News" }) {
                     type="button"
                     onClick={() => setCurrentIndex(index)}
                     aria-label={`Go to news ${index + 1}`}
-                    aria-current={currentIndex === index ? "true" : undefined}
+                    aria-current={
+                      currentIndex === index ? "true" : undefined
+                    }
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       currentIndex === index
                         ? "w-7 bg-[#3B82B8]"
@@ -236,6 +284,7 @@ export default function NewsSection({ title = "News" }) {
               </div>
 
               {/* NEWS COUNTER */}
+
               <span className="text-[11px] font-semibold tabular-nums text-slate-400">
                 {String(currentIndex + 1).padStart(2, "0")} /{" "}
                 {String(totalNews).padStart(2, "0")}
@@ -248,6 +297,7 @@ export default function NewsSection({ title = "News" }) {
       </div>
 
       {/* ================= SLIDE ANIMATION ================= */}
+
       <style>{`
         @keyframes newsSlide {
           from {
@@ -274,3 +324,4 @@ export default function NewsSection({ title = "News" }) {
     </section>
   );
 }
+  

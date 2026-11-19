@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+
 import {
   ArrowRight,
   CalendarDays,
@@ -9,12 +10,20 @@ import {
   ChevronLeft,
   GraduationCap,
 } from "lucide-react";
+
 import { cpdEvents } from "../data/newsEventsData";
+
+// =====================================================
+// CAROUSEL SETTINGS
+// =====================================================
 
 const AUTO_SLIDE_DURATION = 5000;
 const SLIDE_ANIMATION_DURATION = 450;
 
-// Automatically determine registration status
+// =====================================================
+// REGISTRATION STATUS
+// =====================================================
+
 const isRegistrationOpen = (deadline) => {
   if (!deadline) return false;
 
@@ -31,9 +40,14 @@ const isRegistrationOpen = (deadline) => {
   return today <= deadlineDate;
 };
 
+// =====================================================
+// MAIN CPD SECTION
+// =====================================================
+
 export default function CPDEventsSection({
   title = "APCL Academy",
 }) {
+  // Get upcoming programmes
   const upcomingEvents = cpdEvents.filter(
     (event) => event.status !== "Completed"
   );
@@ -43,15 +57,37 @@ export default function CPDEventsSection({
 
   const totalEvents = upcomingEvents.length;
 
+  // =====================================================
+  // CPD DETAIL PAGE LINK
+  // =====================================================
+
+  const getEventLink = (event) => {
+    return event.slug ? `/academy/${event.slug}` : "/academy";
+  };
+
+  // =====================================================
+  // NEXT EVENT
+  // =====================================================
+
   const nextEvent = useCallback(() => {
     if (totalEvents <= 1) return;
+
     setCurrentIndex((prev) => (prev + 1) % totalEvents);
   }, [totalEvents]);
 
+  // =====================================================
+  // PREVIOUS EVENT
+  // =====================================================
+
   const previousEvent = useCallback(() => {
     if (totalEvents <= 1) return;
+
     setCurrentIndex((prev) => (prev - 1 + totalEvents) % totalEvents);
   }, [totalEvents]);
+
+  // =====================================================
+  // AUTOMATIC SLIDING
+  // =====================================================
 
   useEffect(() => {
     if (totalEvents <= 1 || isPaused) return;
@@ -62,6 +98,10 @@ export default function CPDEventsSection({
 
     return () => clearInterval(interval);
   }, [totalEvents, isPaused]);
+
+  // =====================================================
+  // ACTIVE EVENT
+  // =====================================================
 
   const activeEvent = upcomingEvents[currentIndex];
 
@@ -78,7 +118,8 @@ export default function CPDEventsSection({
     >
       <div className="mx-auto h-full min-w-0 max-w-[1440px] px-5 sm:px-8 lg:px-10 2xl:px-12">
 
-        {/* SECTION HEADER */}
+        {/* ================= SECTION HEADER ================= */}
+
         <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-2">
 
           <h2
@@ -87,6 +128,8 @@ export default function CPDEventsSection({
           >
             {title}
           </h2>
+
+          {/* NAVIGATION + VIEW ALL */}
 
           <div className="flex shrink-0 items-center gap-2">
 
@@ -112,32 +155,40 @@ export default function CPDEventsSection({
               </>
             )}
 
-            {/* <Link
-              to="/academy"
+            <Link
+              to="/news"
               className="group inline-flex items-center gap-2 rounded-lg border border-[#D5E3EF] bg-white px-3 py-2.5 text-xs font-bold text-[#245B85] shadow-sm transition hover:border-[#3B82B8] hover:bg-[#EAF3FA]"
             >
               View All
+
               <ArrowRight
                 size={14}
                 className="transition-transform group-hover:translate-x-1"
               />
-            </Link> */}
+            </Link>
+
           </div>
         </div>
 
-        {/* ACADEMY EVENT CARD */}
+        {/* ================= CPD EVENT CARD ================= */}
+
         {activeEvent ? (
           <article
             key={activeEvent.id}
             className="animate-cpd-slide group flex min-w-0 flex-col gap-4 overflow-hidden rounded-xl border border-[#DCE6EF] bg-white p-3 shadow-[0_2px_8px_rgba(30,58,90,0.04)] transition-all duration-300 hover:border-[#B8D2E7] hover:shadow-lg sm:h-[252px] sm:flex-row sm:gap-5 sm:p-3.5"
           >
 
-            {/* EVENT IMAGE - SAME SIZE AS NEWS */}
-            <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-lg bg-[#E5EEF6] sm:h-[220px] sm:w-[240px]">
+            {/* EVENT IMAGE - CLICKABLE */}
 
-              {activeEvent.image ? (
+            <Link
+              to={getEventLink(activeEvent)}
+              aria-label={`View ${activeEvent.title}`}
+              className="relative block h-48 w-full shrink-0 overflow-hidden rounded-lg bg-[#E5EEF6] sm:h-[220px] sm:w-[240px]"
+            >
+
+              {activeEvent.cardImage || activeEvent.image ? (
                 <img
-                  src={activeEvent.image}
+                  src={activeEvent.cardImage || activeEvent.image}
                   alt={activeEvent.imageAlt || activeEvent.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
@@ -156,12 +207,15 @@ export default function CPDEventsSection({
                   <GraduationCap size={40} strokeWidth={1.3} />
                 </div>
               )}
-            </div>
+
+            </Link>
 
             {/* EVENT CONTENT */}
+
             <div className="flex min-w-0 flex-1 flex-col justify-center px-1 py-2 sm:px-2 sm:py-1">
 
               {/* REGISTRATION STATUS */}
+
               <div className="mb-2">
                 {registrationOpen ? (
                   <span className="inline-flex w-fit items-center gap-2 rounded-md border border-[#BBE5CB] bg-[#E9F8EF] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#168044]">
@@ -171,6 +225,7 @@ export default function CPDEventsSection({
                 ) : (
                   <span className="inline-flex w-fit items-center gap-2 rounded-md border border-[#DCE6EF] bg-[#F1F6FB] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#58718A]">
                     <span className="h-2 w-2 rounded-full bg-[#91A4B7]" />
+
                     {activeEvent.registrationDeadline
                       ? "Registration Closed"
                       : "Registration Details to Be Announced"}
@@ -178,57 +233,78 @@ export default function CPDEventsSection({
                 )}
               </div>
 
-              {/* EVENT TITLE */}
+              {/* EVENT TITLE - CLICKABLE */}
+
               <h3 className="break-words text-base font-bold leading-snug text-[#123B64] transition-colors group-hover:text-[#3B82B8] sm:text-lg">
-                {activeEvent.title}
+                <Link
+                  to={getEventLink(activeEvent)}
+                  className="hover:text-[#3B82B8]"
+                >
+                  {activeEvent.title}
+                </Link>
               </h3>
 
               {/* EVENT DESCRIPTION */}
+
               <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-slate-500">
                 {activeEvent.summary}
               </p>
 
-              {/* DATE AND VENUE - COMPACT HIGHLIGHTED ROWS */}
+              {/* DATE AND VENUE */}
+
               <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
 
                 {/* DATE */}
+
                 <div className="inline-flex min-w-0 items-center gap-2 rounded-md border border-[#DCE8F2] bg-[#F4F8FC] px-2.5 py-1.5">
                   <CalendarDays
                     size={15}
                     className="shrink-0 text-[#286B9D]"
                   />
+
                   <span className="text-xs font-semibold text-[#245B85]">
                     {activeEvent.date || "Date to be announced"}
                   </span>
                 </div>
 
                 {/* VENUE */}
+
                 <div className="inline-flex min-w-0 items-center gap-2 rounded-md border border-[#DCE8F2] bg-[#F4F8FC] px-2.5 py-1.5">
                   <MapPin
                     size={15}
                     className="shrink-0 text-[#286B9D]"
                   />
+
                   <span className="text-xs font-semibold text-[#245B85]">
                     {activeEvent.venue || "Venue to be announced"}
                   </span>
                 </div>
+
               </div>
 
-              {/* PROGRAMME BUTTON */}
-                {/* <Link
-                  to={activeEvent.href || "/academy"}
-                  className="mt-3 inline-flex w-fit items-center gap-2 rounded-lg bg-[#286B9D] px-4 py-2.5 text-xs font-bold text-white transition-all duration-200 hover:bg-[#123B64] active:scale-95"
-                >
-                  {activeEvent.buttonLabel || "View Programme"}
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </Link> */}
+              {/* VIEW PROGRAMME BUTTON - DIRECT DETAIL LINK */}
+
+              <Link
+                to={getEventLink(activeEvent)}
+                className="mt-3 inline-flex w-fit items-center gap-2 rounded-lg bg-[#286B9D] px-4 py-2.5 text-xs font-bold text-white transition-all duration-200 hover:bg-[#123B64] active:scale-95"
+              >
+                {activeEvent.buttonLabel || "View Programme"}
+
+                <ArrowRight
+                  size={14}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+
             </div>
           </article>
+
         ) : (
+
+          /* EMPTY STATE */
+
           <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-[#C9D9E7] bg-white px-6 py-12 text-center">
+
             <GraduationCap size={32} className="mb-3 text-[#3B82B8]" />
 
             <h3 className="text-sm font-bold text-[#123B64]">
@@ -238,10 +314,12 @@ export default function CPDEventsSection({
             <p className="mt-1 text-xs text-slate-500">
               New professional development programmes will be announced here.
             </p>
+
           </div>
         )}
 
-        {/* CAROUSEL INDICATORS */}
+        {/* ================= CAROUSEL INDICATORS ================= */}
+
         {totalEvents > 1 && (
           <div className="mt-4 flex items-center justify-between">
 
@@ -266,11 +344,14 @@ export default function CPDEventsSection({
               {String(currentIndex + 1).padStart(2, "0")} /{" "}
               {String(totalEvents).padStart(2, "0")}
             </span>
+
           </div>
         )}
+
       </div>
 
-      {/* SLIDE ANIMATION */}
+      {/* ================= SLIDE ANIMATION ================= */}
+
       <style>{`
         @keyframes cpdSlide {
           from {
@@ -293,6 +374,7 @@ export default function CPDEventsSection({
           }
         }
       `}</style>
+
     </section>
   );
 }
