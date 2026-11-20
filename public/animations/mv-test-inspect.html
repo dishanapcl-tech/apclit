@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anatomy of an MV failure: why testing and inspection matters</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{--navy:#123b64;--blue:#286b9d;--bg:#f1f6fb;--card:#fff;--line:#dce6ef;--ink:#16293d;--mut:#5b6b7e;--ok:#1f9d73;--warn:#f0a500;--bad:#e04545;--off:#aab6c4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a2b;--card:#15263d;--line:#28405f;--ink:#e8f0f9;--mut:#9db0c7;--navy:#9cc7ee;--blue:#5aa3d8;--off:#4a5d75;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 Manrope,system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:18px 14px 28px}
+h1{font-size:clamp(20px,3.6vw,28px);line-height:1.15;font-weight:800;color:var(--navy);margin:0 0 4px}
+.sub{margin:0 0 14px;color:var(--mut);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+button{font:600 13px Manrope,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+button[aria-pressed=true]{background:var(--navy);color:var(--card);border-color:var(--navy)}
+.sp{flex:1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+svg{display:block;width:100%;height:auto}
+.box{fill:var(--card);stroke:var(--navy);stroke-width:2.5}
+.t{fill:var(--ink);font:600 12px Manrope,sans-serif}.t2{fill:var(--mut);font:400 11px Manrope,sans-serif}
+.wire{fill:none;stroke:var(--blue);stroke-width:4;stroke-dasharray:10 8;transition:stroke .4s}
+.term{fill:var(--ok);stroke:var(--navy);stroke-width:2;transition:fill .5s}
+.lamp{fill:var(--warn);transition:fill .4s}
+.hot,.arc,.arc2,.tag,.chk,.pd{opacity:0;transition:opacity .4s}
+.hot{fill:url(#hg)}
+.arc{fill:#ffd23f;stroke:var(--bad);stroke-width:3;transform-box:fill-box;transform-origin:center;transform:scale(.3);transition:opacity .25s,transform .25s}
+.arc2{fill:var(--bad)}
+.pd{fill:none;stroke:var(--warn);stroke-width:2}
+.tag rect{fill:var(--navy)}.tag text{fill:var(--card);font:600 11px Manrope,sans-serif}
+.chk{fill:var(--ok);font:800 14px Manrope,sans-serif}
+.adj{transition:stroke .4s}
+[data-s=aging] .term,[data-s=found] .term{fill:var(--warn)}
+[data-s=fault] .term,[data-s=outage] .term{fill:var(--bad)}
+[data-s=aging] .hot,[data-s=found] .hot{opacity:.7}[data-s=fault] .hot,[data-s=outage] .hot{opacity:1}
+[data-s=aging] .pd,[data-s=found] .pd{opacity:1}
+[data-s=fault] .arc,[data-s=outage] .arc{opacity:1;transform:scale(1)}
+[data-s=fault] .arc2,[data-s=outage] .arc2{opacity:.85;transition-delay:.5s}
+[data-s=outage] .adj{stroke:var(--bad)}
+[data-s=found] .tag,[data-s=found] .chk,[data-s=fixed] .chk{opacity:1}
+[data-s=outage] .wire{stroke:var(--off);animation:none!important}
+[data-s=outage] .lamp{fill:var(--off)}
+.steps{display:flex;gap:6px;margin:12px 0 8px;flex-wrap:wrap}
+.step{flex:1;min-width:120px;font-size:12px;font-weight:600;color:var(--mut);border-top:4px solid var(--line);padding-top:5px}
+.step.on{color:var(--navy);border-color:var(--blue)}.step.done{border-color:var(--navy)}
+.cap{min-height:5.4em}.cap b{display:block;color:var(--navy);font-size:16px;margin-bottom:2px}
+.cap p{margin:0}
+.m{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:10px}
+@media(max-width:620px){.m{grid-template-columns:1fr}}
+.row .h{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600}
+.row .h span:last-child{color:var(--mut);font-weight:600}
+.trk{height:9px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:4px}
+.trk i{display:block;height:100%;width:5%;border-radius:5px;background:var(--ok);transition:width .8s,background .4s}
+.trk i.warn{background:var(--warn)}.trk i.bad{background:var(--bad)}
+.note{font-size:12px;color:var(--mut);margin:10px 2px 0}
+@media (prefers-reduced-motion:no-preference){
+.wire{animation:flow 1s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-18}}
+[data-s=aging] .pd,[data-s=found] .pd{animation:rip 1.5s ease-out infinite}
+[data-s=aging] .pd.b,[data-s=found] .pd.b{animation-delay:.7s}
+@keyframes rip{0%{r:8;opacity:.9}100%{r:34;opacity:0}}
+[data-s=aging] .hot{animation:pul 2s ease-in-out infinite}
+@keyframes pul{50%{opacity:.35}}
+[data-s=fault] .arc{animation:fl .18s steps(2) infinite}
+@keyframes fl{50%{transform:scale(1.25);opacity:.6}}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Anatomy of an MV failure</h1>
+<p class="sub">Follow one hidden defect through an MV installation, with and without testing and inspection.</p>
+<div class="bar">
+<button id="mf" aria-pressed="true">Without testing</button>
+<button id="mt" aria-pressed="false">With testing and inspection</button>
+<span class="sp"></span>
+<button id="pp">Pause</button><button id="nx">Next step</button>
+</div>
+<div class="card">
+<svg viewBox="0 0 900 300" role="img" aria-label="Single line diagram: MV incomer, circuit breaker with protection relay, cable, termination, transformer and load">
+<defs><radialGradient id="hg"><stop offset="0" stop-color="#ff7a00"/><stop offset="1" stop-color="#ff7a00" stop-opacity="0"/></radialGradient></defs>
+<path class="wire" d="M40 150H150"/><path class="wire" d="M220 150H520"/><path class="wire" d="M531 150H574"/><path class="wire" d="M651 150H760"/>
+<text class="t2" x="40" y="136">MV incomer</text>
+<circle class="box" cx="118" cy="150" r="9"/><text class="t2" x="104" y="176">CT</text>
+<path d="M118 141V58H158" fill="none" stroke="var(--mut)" stroke-width="1.5" stroke-dasharray="4 3"/>
+<rect class="box" x="158" y="40" width="64" height="36" rx="5"/><text class="t" x="168" y="63">50/51</text><text class="chk" x="200" y="34">✓</text>
+<text class="t2" x="158" y="92">Protection relay</text>
+<circle class="hot" cx="185" cy="150" r="46"/>
+<rect class="box" x="150" y="120" width="70" height="60" rx="5"/><text class="t" x="170" y="155">VCB</text>
+<rect class="box adj" x="150" y="222" width="70" height="52" rx="5"/><text class="t2" x="152" y="289">Adjacent panel</text>
+<circle class="arc2" cx="185" cy="248" r="22"/>
+<text class="t2" x="330" y="138">MV cable</text>
+<circle class="pd" cx="520" cy="150" r="8"/><circle class="pd b" cx="520" cy="150" r="8"/>
+<circle class="term" cx="520" cy="150" r="12"/><text class="t2" x="490" y="182">Termination</text>
+<polygon class="arc" points="520,118 529,142 552,134 534,152 556,170 530,166 520,190 512,166 486,172 506,152 488,134 512,142"/>
+<circle class="box" cx="600" cy="150" r="26"/><circle class="box" cx="626" cy="150" r="26"/><text class="t2" x="586" y="198">Transformer</text>
+<rect class="box" x="760" y="122" width="110" height="56" rx="6"/><text class="t2" x="786" y="196">LV load</text>
+<circle class="lamp" cx="785" cy="150" r="8"/><circle class="lamp" cx="815" cy="150" r="8"/><circle class="lamp" cx="845" cy="150" r="8"/>
+<g class="tag"><rect x="440" y="92" width="96" height="22" rx="11"/><text x="452" y="107">PD / VLF test</text></g>
+<g class="tag"><rect x="132" y="190" width="106" height="22" rx="11"/><text x="143" y="205">µΩ contact test</text></g>
+<g class="tag"><rect x="238" y="46" width="118" height="22" rx="11"/><text x="249" y="61">Relay sec. injection</text></g>
+<g class="tag"><rect x="560" y="92" width="92" height="22" rx="11"/><text x="572" y="107">Thermography</text></g>
+</svg>
+<div class="steps" id="st"></div>
+<div class="cap"><b id="ct"></b><p id="cb"></p></div>
+<div class="m" id="mm"></div>
+</div>
+<p class="note">Qualitative illustration of how typical MV defects develop. It does not represent measured values from any installation.</p>
+</main>
+<script>
+(function(){
+var q=new URLSearchParams(location.search);if(q.get("theme")==="light")document.documentElement.setAttribute("data-theme","light");
+var root=document.documentElement;
+var seq={fail:["ok","aging","fault","outage"],test:["ok","aging","found","fixed"]};
+var dur={ok:2600,aging:6500,fault:4800,outage:5200,found:6800,fixed:5200};
+var labels=["Commissioned","Years in service","Turning point","Outcome"];
+var cap={
+ok:["Commissioned and energised","Insulation resistance, contact resistance and relay settings were all verified. Every reading is within limits."],
+aging:["Years in service: the defect develops unseen","Thermal cycling loosens bolted joints and raises contact resistance. Voids and moisture in the cable termination start partial discharge. The relay has not been re-tested since commissioning. The supply stays on, so nothing looks wrong."],
+fault:["Without testing: insulation breaks down","Partial discharge erodes the insulation until it tracks and fails. An unverified relay setting or CT circuit delays the trip, the arc energy grows, and the damage spreads to the adjacent panel."],
+outage:["Result: unplanned outage","Damaged switchgear and cable, lost production, risk to people, and a long wait for spares. The repair bill is the smaller part of the cost."],
+found:["With testing: the defect is found early","In a planned shutdown, partial discharge testing, micro-ohm contact resistance, thermography and relay secondary injection locate the termination defect and prove the relay operates correctly."],
+fixed:["Result: repaired on your schedule","The termination is re-made and the joints re-torqued. Condition is verified and recorded in a report, and the load never saw a fault."]
+};
+var met=[["Partial discharge","pd"],["Contact resistance","cr"],["Termination temperature","tt"],["Relay trip performance","rt"]];
+var val={
+ok:[[4,"ok","None detected"],[5,"ok","Within limit"],[6,"ok","Normal"],[8,"ok","Verified"]],
+aging:[[50,"warn","Rising, hidden"],[55,"warn","Rising, hidden"],[60,"warn","Warming, hidden"],[25,"warn","Never re-tested"]],
+fault:[[100,"bad","Breakdown"],[90,"bad","Overheating"],[100,"bad","Fault"],[92,"bad","Late trip"]],
+found:[[50,"warn","Located"],[55,"warn","Out of limit"],[60,"warn","Hot spot found"],[8,"ok","Verified"]],
+fixed:[[4,"ok","None detected"],[6,"ok","Restored"],[7,"ok","Normal"],[8,"ok","Verified"]]
+};
+val.outage=val.fault;
+var $=function(i){return document.getElementById(i)};
+var mm=$("mm"),st=$("st");
+met.forEach(function(m){var d=document.createElement("div");d.className="row";d.innerHTML='<div class="h"><span>'+m[0]+'</span><span id="v'+m[1]+'"></span></div><div class="trk"><i id="b'+m[1]+'"></i></div>';mm.appendChild(d)});
+labels.forEach(function(l){var d=document.createElement("div");d.className="step";d.textContent=l;st.appendChild(d)});
+var mode="fail",i=0,timer=null,playing=!matchMedia("(prefers-reduced-motion:reduce)").matches,picked=false;
+function show(){
+var s=seq[mode][i];root.setAttribute("data-s",s);
+$("ct").textContent=cap[s][0];$("cb").textContent=cap[s][1];
+met.forEach(function(m,k){var v=val[s][k],b=$("b"+m[1]);b.style.width=v[0]+"%";b.className=v[1]==="ok"?"":v[1];$("v"+m[1]).textContent=v[2]});
+Array.prototype.forEach.call(st.children,function(e,k){e.className="step"+(k===i?" on":k<i?" done":"")});
+}
+function sched(){clearTimeout(timer);if(!playing)return;timer=setTimeout(function(){adv(true)},dur[seq[mode][i]])}
+function adv(auto){
+if(i<3){i++}else{if(auto&&!picked){setMode(mode==="fail"?"test":"fail",true);return}i=0}
+show();sched();
+}
+function setMode(m,auto){mode=m;i=0;if(!auto)picked=true;$("mf").setAttribute("aria-pressed",m==="fail");$("mt").setAttribute("aria-pressed",m==="test");show();sched()}
+$("mf").onclick=function(){setMode("fail")};$("mt").onclick=function(){setMode("test")};
+$("nx").onclick=function(){adv(false)};
+$("pp").onclick=function(){playing=!playing;this.textContent=playing?"Pause":"Play";sched()};
+$("pp").textContent=playing?"Pause":"Play";
+show();sched();
+})();
+</script>
+</body>
+</html>

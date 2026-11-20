@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Same defect, two outcomes: why MV testing and inspection matters</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{--bg:#eef1f4;--ink:#14213d;--mut:#51607a;--card:#fff;--line:#c9d1dc;--ok:#1b8a7a;--warn:#f2a900;--bad:#d1342f;--cab:#dfe5ec;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--ink:#eaf0f8;--mut:#9fb0c8;--card:#18223a;--line:#2b3a58;--cab:#26334f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1624;--ink:#eaf0f8;--mut:#9fb0c8;--card:#18223a;--line:#2b3a58;--cab:#26334f;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+main{max-width:920px;margin:0 auto;padding:28px 18px 40px}
+h1{font:700 clamp(30px,6vw,52px)/1.02 "Barlow Condensed","Arial Narrow",sans-serif;margin:0 0 8px;letter-spacing:.2px}
+.sub{color:var(--mut);margin:0 0 22px;max-width:60ch}
+.cap{position:relative;height:3.6em;margin-bottom:14px;font-weight:500}
+.cap span{position:absolute;inset:0;opacity:0}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.stage{grid-template-columns:1fr}}
+.lane{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.lane h2{font:600 24px/1 "Barlow Condensed",sans-serif;margin:0 0 12px}
+.panel{position:relative;display:flex;gap:6px;background:var(--cab);border:2px solid var(--line);border-radius:6px;padding:10px;height:96px}
+.cub{flex:1;border:2px solid var(--line);border-radius:3px;background:var(--card);position:relative}
+.cub::after{content:"";position:absolute;left:50%;top:14px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--mut);opacity:.5}
+.cub.d::after{opacity:1}
+.arc{position:absolute;left:50%;top:50%;width:90px;height:90px;margin:-45px;border-radius:50%;background:radial-gradient(circle,#fff 0,var(--warn) 30%,var(--bad) 60%,transparent 70%);opacity:0;transform:scale(.3)}
+.lbl{font-size:13px;color:var(--mut);margin:14px 0 4px}
+.bar{height:12px;border-radius:6px;background:var(--cab);overflow:hidden}
+.fill{height:100%;border-radius:6px}
+.tag{margin-top:12px;font-weight:500;min-height:3em}
+.L .fill.h{width:5%;background:var(--bad)}.R .fill.h{width:100%;background:var(--ok)}
+.L .fill.c{width:95%;background:var(--bad)}.R .fill.c{width:10%;background:var(--ok)}
+.L .panel{border-color:var(--bad)}.L .cub.d::after{background:var(--bad)}.R .cub.d::after{background:var(--ok)}
+.L .arc{opacity:.25;transform:scale(1)}
+.cap span.last{opacity:1}
+@media (prefers-reduced-motion:no-preference){
+:root{--T:18s}
+.cap span{animation:var(--T) linear infinite both}
+.cap .a{animation-name:ca}.cap .b{animation-name:cb}.cap .c{animation-name:cc}.cap .d{animation-name:cd}
+.cap span.last{opacity:0}
+@keyframes ca{0%,16%{opacity:1}20%,100%{opacity:0}}
+@keyframes cb{0%,16%{opacity:0}20%,50%{opacity:1}54%,100%{opacity:0}}
+@keyframes cc{0%,50%{opacity:0}54%,72%{opacity:1}76%,100%{opacity:0}}
+@keyframes cd{0%,72%{opacity:0}76%,97%{opacity:1}100%{opacity:0}}
+.fill,.arc,.tag,.cub.d::after{animation:var(--T) linear infinite both}
+.L .fill.h{animation-name:lh}.R .fill.h{animation-name:rh}
+.L .fill.c{animation-name:lc}.R .fill.c{animation-name:rc}
+.L .arc{animation-name:arcL}
+.L .tag{animation-name:tagL}.R .tag{animation-name:tagR}
+.L .cub.d::after{animation-name:dotL}.R .cub.d::after{animation-name:dotR}
+@keyframes lh{0%,16%{width:100%;background:var(--ok)}50%{width:34%;background:var(--warn)}56%{width:34%;background:var(--warn)}58%,100%{width:5%;background:var(--bad)}}
+@keyframes rh{0%,16%{width:100%;background:var(--ok)}50%{width:34%;background:var(--warn)}60%{width:34%;background:var(--warn)}68%,100%{width:100%;background:var(--ok)}}
+@keyframes lc{0%,56%{width:0}76%,100%{width:95%}}
+@keyframes rc{0%,60%{width:0}76%,100%{width:10%}}
+@keyframes arcL{0%,55%{opacity:0;transform:scale(.3)}57%{opacity:1;transform:scale(1.15)}60%{opacity:.2}63%{opacity:.9;transform:scale(1)}70%,100%{opacity:.25;transform:scale(1)}}
+@keyframes tagL{0%,60%{opacity:0}66%,100%{opacity:1}}
+@keyframes tagR{0%,62%{opacity:0}68%,100%{opacity:1}}
+@keyframes dotL{0%,18%{opacity:.5;background:var(--mut)}22%,54%{opacity:1;background:var(--warn)}57%,100%{opacity:1;background:var(--bad)}}
+@keyframes dotR{0%,18%{opacity:.5;background:var(--mut)}22%,50%{opacity:1;background:var(--warn)}60%{background:var(--warn)}68%,100%{opacity:1;background:var(--ok)}}
+}
+.foot{margin-top:18px;color:var(--mut);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<h1>Same defect. Two outcomes.</h1>
+<p class="sub">A loose termination or ageing insulation is invisible from outside. What happens next depends on one decision: test and inspect, or wait.</p>
+<div class="cap" aria-live="off">
+<span class="a">Energised. The switchgear passed commissioning and looks perfect.</span>
+<span class="b">Years pass. Insulation ages, terminations loosen, moisture creeps in. Nothing shows from outside.</span>
+<span class="c">Then the day comes. One site gets a surprise. The other gets a plan.</span>
+<span class="d">Same defect. One pays for an outage, damage and risk to people. The other pays for a planned repair.</span>
+<span class="last">Same defect. One pays for an outage, damage and risk to people. The other pays for a planned repair.</span>
+</div>
+<div class="stage">
+<section class="lane L"><h2>Run to failure</h2>
+<div class="panel"><div class="cub"></div><div class="cub d"></div><div class="cub"></div><div class="arc"></div></div>
+<div class="lbl">Condition of the asset</div><div class="bar"><div class="fill h"></div></div>
+<div class="lbl">Relative cost of the same defect</div><div class="bar"><div class="fill c"></div></div>
+<div class="tag">Unplanned outage, equipment damage, safety risk</div></section>
+<section class="lane R"><h2>Test and inspect</h2>
+<div class="panel"><div class="cub"></div><div class="cub d"></div><div class="cub"></div></div>
+<div class="lbl">Condition of the asset</div><div class="bar"><div class="fill h"></div></div>
+<div class="lbl">Relative cost of the same defect</div><div class="bar"><div class="fill c"></div></div>
+<div class="tag">Defect found and repaired in a planned shutdown</div></section>
+</div>
+<p class="foot">Amithi Power Consultants: comprehensive inspection of MV installations to relevant standards, and protection relay testing.</p>
+</main>
+</body>
+</html>

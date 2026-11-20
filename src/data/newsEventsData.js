@@ -13,6 +13,79 @@
 // =====================================================
 
 export const insights = [
+  {
+  id: "mv-testing-inspection-insight",
+  slug: "why-mv-testing-and-inspection-is-critical",
+  category: "Technical Insight",
+  date: "20.11.2026",
+  title: "Why Medium Voltage Testing and Inspection Is Critical",
+  summary:
+    "A medium voltage installation that is operating normally is not necessarily healthy. This article explains how hidden defects develop, why untested protection is a risk, and why periodic testing and inspection is far less costly than failure.",
+
+  cardImage: "/images/Insights/MV_testing.png",
+  fullImage: "/images/Insights/mv-testing-full.jpg",
+  galleryImages: ["/images/Insights/mv-testing-full.jpg"],
+  image: "/images/Insights/mv-testing.jpg",
+  fallbackImage:
+    "https://images.unsplash.com/photo-1473341304170-971b4b8c5c4a?auto=format&fit=crop&w=1200&q=85",
+  imageAlt: "Medium voltage switchgear installation",
+
+  animation: "/animations/mv-test-inspect.html",
+
+  author: "Amithi Power Consultants (Pvt) Ltd",
+  readingTime: "5 min read",
+
+  introduction:
+    "Medium voltage (MV) switchgear, cables and protection systems are expected to operate quietly for years. Because they usually do, testing and inspection is often treated as an optional expense until a failure occurs. By then, the cost is no longer a matter of choice.",
+
+  sections: [
+    {
+      heading: "A Working System Is Not Necessarily a Healthy System",
+      paragraphs: [
+        "Voltage, current and indicator lights can all appear normal while a defect is developing inside an MV installation. Normal operation only shows that the equipment has not yet failed. It does not show how close it is to failing.",
+        "Most MV failures are the final stage of a gradual process that began months or years earlier and could not be seen from outside the panel."
+      ]
+    },
+    {
+      heading: "How Defects Develop Without Warning",
+      paragraphs: [
+        "Thermal cycling and vibration can loosen bolted connections, increasing contact resistance and causing localised heating. Voids, contamination and moisture in cable terminations and joints can initiate partial discharge, which progressively erodes insulation.",
+        "Dust, humidity and ageing of insulating materials further reduce the margin between normal operation and breakdown. None of these conditions is visible during routine operation."
+      ]
+    },
+    {
+      heading: "Protection That Has Never Been Tested",
+      paragraphs: [
+        "A protection relay is only called upon when a fault occurs. If its settings, CT circuits, trip logic and breaker operation have not been verified, there is no assurance that it will clear the fault correctly and in time.",
+        "A delayed or failed trip allows a local fault to escalate, increasing equipment damage, the extent of the outage and the arc flash hazard to personnel."
+      ]
+    },
+    {
+      heading: "The Real Cost of Run-to-Failure",
+      paragraphs: [
+        "The cost of a failure extends well beyond the repair itself. It includes unplanned downtime, damage to adjacent equipment, extended procurement lead times for spares, safety exposure for staff and possible consequences for insurance and compliance.",
+        "The same defect, identified during a planned shutdown, is typically resolved in a shorter time, at lower cost and with no risk to people or production."
+      ]
+    },
+    {
+      heading: "What Comprehensive Inspection and Testing Covers",
+      paragraphs: [
+        "A comprehensive inspection of the MV installation according to the relevant standards examines the condition of switchgear, cable terminations, earthing, interlocks and documentation. Electrical tests may include insulation and contact resistance measurements, partial discharge assessment, breaker timing and thermographic survey.",
+        "Protection relay testing verifies relay settings and operation through secondary injection, together with the associated CT and trip circuits. Findings are reported with priorities, allowing the owner to plan and budget corrective work."
+      ]
+    },
+    {
+      heading: "APCL Engineering Approach",
+      paragraphs: [
+        "Amithi Power Consultants (Pvt) Ltd carries out inspection of MV installations and protection relay testing to support the safe, reliable and predictable operation of electrical systems.",
+        "Our approach is to convert unknown risk into documented condition, so that decisions on maintenance and investment are based on engineering evidence rather than on failure."
+      ]
+    }
+  ],
+
+  conclusion:
+    "The relevant question is not whether testing and inspection is affordable, but whether an unplanned failure is. Periodic assessment identifies defects while they can still be corrected on the owner's schedule, protecting people, equipment and continuity of supply."
+}
   // {
   //   id: "power-quality-insight",
   //   slug: "understanding-power-quality",
@@ -166,10 +239,10 @@ export const newsItems = [
     date: "02.11.2026",
 
     title:
-      "Project Completion – Medium Voltage Testing & Commissioning for University",
+      "Project Completion – Medium Voltage Testing & Commissioning for University Complex",
 
     summary:
-      "Successful completion of a comprehensive MV testing and commissioning project for a university. The project involved inspection and testing to assess electrical system safety and operational readiness.",
+      "Successful completion of a comprehensive MV testing and commissioning project for a university Complex. The project involved inspection and testing to assess electrical system safety and operational readiness.",
 
     content: [
       "Amithi Power Consultants (Pvt) Ltd successfully completed a Medium Voltage testing and commissioning project for a university.",

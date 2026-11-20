@@ -49,10 +49,21 @@ export default function InsightsDetailPage() {
           </Link>
 
           <div className="overflow-hidden rounded-2xl border border-[#DCE6EF] bg-white shadow-sm">
-            <ImageGallery
-              title={article.title}
-              images={article.galleryImages?.length ? article.galleryImages : [detailImage || detailFallbackImage].filter(Boolean)}
-            />
+            {article.animation ? (
+              <div className="border-b border-[#DCE6EF] bg-[#F1F6FB]">
+                <iframe
+                  src={`${article.animation}?theme=light`}
+                  title={`${article.title} animation`}
+                  loading="lazy"
+                  className="block h-[800px] w-full border-0 sm:h-[660px]"
+                />
+              </div>
+            ) : (
+              <ImageGallery
+                title={article.title}
+                images={article.galleryImages?.length ? article.galleryImages : [detailImage || detailFallbackImage].filter(Boolean)}
+              />
+            )}
 
             <div className="p-6 sm:p-9 lg:p-12">
               <span className="inline-block rounded-md bg-[#EAF3FA] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wide text-[#245B85]">
